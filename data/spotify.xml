@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<spotify>
+    <artistas>
+        <artista id="ART01">
+            <nombre>The Weeknd</nombre>
+            <pais>Canadá</pais>
+        </artista>
+        <artista id="ART02">
+            <nombre>Daft Punk</nombre>
+            <pais>Francia</pais>
+        </artista>
+    </artistas>
+    <albumes>
+        <album id="ALB01" artista_id="ART01">
+            <titulo>Starboy</titulo>
+            <anio>2016</anio>
+        </album>
+    </albumes>
+    <canciones>
+        <cancion id="C001" album_id="ALB01">
+            <titulo>Starboy</titulo>
+            <genero>R&B</genero>
+            <duracion>3:50</duracion>
+            <featuring>ART02</featuring>
+        </cancion>
+        <cancion id="C002" album_id="ALB01">
+            <titulo>I Feel It Coming</titulo>
+            <genero>Disco</genero>
+            <duracion>4:29</duracion>
+            <featuring>ART02</featuring>
+        </cancion>
+    </canciones>
+</spotify>
