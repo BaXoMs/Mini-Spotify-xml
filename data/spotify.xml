@@ -19,7 +19,7 @@
     <canciones>
         <cancion id="C001" album_id="ALB01">
             <titulo>Starboy</titulo>
-            <genero>R&B</genero>
+            <genero>RB</genero>
             <duracion>3:50</duracion>
             <featuring>ART02</featuring>
         </cancion>
