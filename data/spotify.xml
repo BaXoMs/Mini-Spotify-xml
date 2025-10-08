@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version='1.0' encoding='utf-8'?>
 <spotify>
     <artistas>
         <artista id="ART01">
@@ -9,13 +9,13 @@
             <nombre>Daft Punk</nombre>
             <pais>Francia</pais>
         </artista>
-    </artistas>
+    <artista id="ART03"><nombre>The trampps</nombre></artista></artistas>
     <albumes>
         <album id="ALB01" artista_id="ART01">
             <titulo>Starboy</titulo>
             <anio>2016</anio>
         </album>
-    </albumes>
+    <album id="ALB02" artista_id="ART03"><titulo>disco inferno</titulo></album></albumes>
     <canciones>
         <cancion id="C001" album_id="ALB01">
             <titulo>Starboy</titulo>
@@ -29,5 +29,5 @@
             <duracion>4:29</duracion>
             <featuring>ART02</featuring>
         </cancion>
-    </canciones>
+    <cancion id="C003" album_id="ALB01"><titulo>Error 404</titulo><genero>EDM</genero><duracion>3:10</duracion></cancion><cancion id="C004" album_id="ALB02"><titulo>Disco inferno</titulo><genero>Disco</genero><duracion>7:00</duracion></cancion></canciones>
 </spotify>

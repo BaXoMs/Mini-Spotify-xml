@@ -1,10 +1,24 @@
-# Entornos virtuales
+# Archivo de variables de entorno - ¡NUNCA SUBIR A GITHUB!
+.env
+
+# Entornos virtuales de Python
 venv/
-*.env
+*.venv
+env/
 
 # Archivos de caché de Python
 __pycache__/
 *.pyc
+*.pyo
+*.pyd
 
-# Archivos del IDE
+# Carpetas de configuración del editor de código
 .vscode/
+.idea/
+
+# Archivos de instancia de Flask (donde se pueden guardar bases de datos o secretos)
+instance/
+
+# Archivos generados por el sistema operativo
+.DS_Store
+Thumbs.db
