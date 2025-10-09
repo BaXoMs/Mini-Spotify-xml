@@ -1,5 +1,4 @@
 <?xml version='1.0' encoding='utf-8'?>
-<?xml-stylesheet type="text/xsl" href="/frontend/spotify.xsl"?>
 <spotify>
     <artistas>
         <artista id="ART01">
@@ -14,6 +13,9 @@
             <nombre>The trampps</nombre>
             <pais>Desconocido</pais>
         </artista>
+        <artista id="ART04">
+            <nombre>asd</nombre>
+        </artista>
     </artistas>
     <albumes>
         <album id="ALB01" artista_id="ART01">
@@ -24,12 +26,16 @@
             <titulo>Disco inferno</titulo>
             <anio>Desconocido</anio>
         </album>
+        <album id="ALB03" artista_id="ART04">
+            <titulo>fsd</titulo>
+            <anio></anio>
+        </album>
     </albumes>
     <canciones>
-        <cancion id="C001" album_id="ALB01">
-            <titulo>Starboy</titulo>
-            <genero>RB</genero>
-            <duracion>3:50</duracion>
+        <cancion id="C001" album_id="ALB03">
+            <titulo>sdf</titulo>
+            <genero>sdfsd</genero>
+            <duracion>323</duracion>
             <featuring>ART02</featuring>
         </cancion>
         <cancion id="C002" album_id="ALB01">
@@ -40,13 +46,13 @@
         </cancion>
         <cancion id="C003" album_id="ALB01">
             <titulo>Error 404</titulo>
-            <genero>EDM</genero>
+            <genero>asd</genero>
             <duracion>3:10</duracion>
         </cancion>
         <cancion id="C004" album_id="ALB02">
-            <titulo>Disco inferno</titulo>
+            <titulo>adasa</titulo>
             <genero>Disco</genero>
-            <duracion>7:00</duracion>
+            <duracion>23</duracion>
         </cancion>
     </canciones>
 </spotify>
