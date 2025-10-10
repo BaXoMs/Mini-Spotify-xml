@@ -1,41 +1,94 @@
 document.addEventListener('DOMContentLoaded', function() {
     cargarCanciones();
     configurarFormulario();
-    configurarTabla();
+    configurarListaCanciones(); // Renombrado de configurarTabla
+    configurarBusqueda();
 });
 
-function cargarCanciones() {
-    const tablaBody = document.getElementById('tabla-canciones-body');
-    fetch('/api/canciones')
+// MODIFICADA: Ahora crea DIVs en lugar de filas de tabla <tr>
+function cargarCanciones(query = '') {
+    const songsContainer = document.getElementById('songs-list-container');
+    const url = `/api/canciones?q=${encodeURIComponent(query)}`;
+    
+    fetch(url)
         .then(response => response.json())
         .then(data => {
-            tablaBody.innerHTML = '';
+            // Limpiamos solo las filas de canciones, no la cabecera
+            const existingRows = songsContainer.querySelectorAll('.song-row');
+            existingRows.forEach(row => row.remove());
+
             data.forEach(cancion => {
-                const fila = document.createElement('tr');
+                // Creamos un div con la clase 'song-row'
+                const fila = document.createElement('div');
+                fila.classList.add('song-row');
+                
+                // Usamos la estructura de divs que coincide con tu CSS
                 fila.innerHTML = `
-                    <td>${cancion.titulo}</td>
-                    <td>${cancion.artista}</td>
-                    <td>${cancion.album}</td>
-                    <td>${cancion.genero}</td>
-                    <td>${cancion.duracion}</td>
-                    <td>
+                    <div class="title">${cancion.titulo}</div>
+                    <div>
+                        <span class="song-artist">${cancion.artista}</span><br/>
+                        <span class="song-album">${cancion.album}</span>
+                    </div>
+                    <div><span class="genre-tag">${cancion.genero}</span></div>
+                    <div class="song-duration">${cancion.duracion}</div>
+                    <div>
                         <button class="btn-editar" data-id="${cancion.id}">Editar</button>
                         <button class="btn-eliminar" data-id="${cancion.id}">Eliminar</button>
-                    </td>
+                    </div>
                 `;
-                tablaBody.appendChild(fila);
+                songsContainer.appendChild(fila);
             });
         })
         .catch(error => console.error('Error al cargar las canciones:', error));
 }
 
+// NUEVA: Configura la barra de búsqueda
+function configurarBusqueda() {
+    const inputBusqueda = document.getElementById('input-busqueda');
+    inputBusqueda.addEventListener('input', function() {
+        cargarCanciones(inputBusqueda.value);
+    });
+}
+
+// Renombrada y adaptada para el nuevo contenedor de canciones
+function configurarListaCanciones() {
+    document.getElementById('songs-list-container').addEventListener('click', function(event) {
+        const target = event.target;
+        const cancionId = target.dataset.id;
+
+        if (target.classList.contains('btn-eliminar')) {
+            if (confirm('¿Estás seguro de que quieres eliminar esta canción?')) {
+                fetch(`/api/canciones/${cancionId}`, { method: 'DELETE' })
+                    .then(response => response.json())
+                    .then(data => {
+                        console.log('Eliminado:', data);
+                        cargarCanciones(document.getElementById('input-busqueda').value);
+                    });
+            }
+        } else if (target.classList.contains('btn-editar')) {
+            fetch(`/api/canciones/${cancionId}`)
+                .then(response => response.json())
+                .then(cancion => {
+                    document.getElementById('titulo').value = cancion.titulo;
+                    document.getElementById('artista_nombre').value = cancion.artista;
+                    document.getElementById('album_titulo').value = cancion.album;
+                    document.getElementById('genero').value = cancion.genero;
+                    document.getElementById('duracion').value = cancion.duracion;
+
+                    const form = document.getElementById('form-anadir-cancion');
+                    form.dataset.editingId = cancion.id;
+                    form.querySelector('button').textContent = 'Actualizar Canción';
+                });
+        }
+    });
+}
+
+// Las funciones de formulario no necesitan cambios
 function configurarFormulario() {
     const form = document.getElementById('form-anadir-cancion');
     form.addEventListener('submit', function(event) {
         event.preventDefault();
-        
-        const cancionId = form.dataset.editingId; // Verificamos si estamos editando
-        
+        const cancionId = form.dataset.editingId;
         const cancionData = {
             titulo: document.getElementById('titulo').value,
             artista: document.getElementById('artista_nombre').value,
@@ -43,80 +96,29 @@ function configurarFormulario() {
             genero: document.getElementById('genero').value,
             duracion: document.getElementById('duracion').value
         };
+        const query = document.getElementById('input-busqueda').value;
 
-        if (cancionId) {
-            // --- MODO ACTUALIZAR ---
-            fetch(`/api/canciones/${cancionId}`, {
-                method: 'PUT',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(cancionData)
-            })
-            .then(response => response.json())
-            .then(data => {
-                console.log('Éxito (Update):', data);
-                resetFormulario();
-                cargarCanciones();
-            })
-            .catch(error => console.error('Error al actualizar:', error));
-        } else {
-            // --- MODO AÑADIR (como antes) ---
-            fetch('/api/canciones', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(cancionData)
-            })
-            .then(response => response.json())
-            .then(data => {
-                console.log('Éxito (Create):', data);
-                resetFormulario();
-                cargarCanciones();
-            })
-            .catch(error => console.error('Error al crear:', error));
-        }
-    });
-}
+        const isUpdating = !!cancionId;
+        const url = isUpdating ? `/api/canciones/${cancionId}` : '/api/canciones';
+        const method = isUpdating ? 'PUT' : 'POST';
 
-function configurarTabla() {
-    document.getElementById('tabla-canciones-body').addEventListener('click', function(event) {
-        const target = event.target;
-        const cancionId = target.dataset.id;
-
-        if (target.classList.contains('btn-eliminar')) {
-            // --- LÓGICA DE ELIMINAR (como antes) ---
-            if (confirm('¿Estás seguro de que quieres eliminar esta canción?')) {
-                fetch(`/api/canciones/${cancionId}`, { method: 'DELETE' })
-                    .then(response => response.json())
-                    .then(data => {
-                        console.log('Eliminado:', data);
-                        cargarCanciones();
-                    })
-                    .catch(error => console.error('Error al eliminar:', error));
-            }
-        } else if (target.classList.contains('btn-editar')) {
-            // --- LÓGICA DE EDITAR ---
-            fetch(`/api/canciones/${cancionId}`)
-                .then(response => response.json())
-                .then(cancion => {
-                    // Llenar el formulario con los datos de la canción
-                    document.getElementById('titulo').value = cancion.titulo;
-                    document.getElementById('artista_nombre').value = cancion.artista;
-                    document.getElementById('album_titulo').value = cancion.album;
-                    document.getElementById('genero').value = cancion.genero;
-                    document.getElementById('duracion').value = cancion.duracion;
-
-                    // Poner el formulario en "modo edición"
-                    const form = document.getElementById('form-anadir-cancion');
-                    form.dataset.editingId = cancion.id; // Guardamos el ID en el formulario
-                    form.querySelector('button').textContent = 'Actualizar Canción';
-                })
-                .catch(error => console.error('Error al obtener datos para editar:', error));
-        }
+        fetch(url, {
+            method: method,
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(cancionData)
+        })
+        .then(response => response.json())
+        .then(data => {
+            console.log('Éxito:', data);
+            resetFormulario();
+            cargarCanciones(query);
+        });
     });
 }
 
 function resetFormulario() {
     const form = document.getElementById('form-anadir-cancion');
-    form.reset(); // Limpia los campos
-    delete form.dataset.editingId; // Quitamos el ID del modo edición
+    form.reset();
+    delete form.dataset.editingId;
     form.querySelector('button').textContent = 'Guardar Canción';
 }
