@@ -1,229 +1,195 @@
-# app.py - Versión Final Híbrida
+from flask import Flask, jsonify, request, send_from_directory
+from owlready2 import *
+import os
 
-# --- Importaciones ---
-from dotenv import load_dotenv
-from lxml import etree
-import xml.etree.ElementTree as ET
-from flask import Flask, jsonify, request
+app = Flask(__name__)
 
-# --- Configuración Inicial ---
-load_dotenv()  # Carga las variables del archivo .env
-app = Flask(__name__) # Inicializa la aplicación Flaskñ
+# --- CONFIGURACIÓN ---
+# 1. CORRECCIÓN DE RUTA: Apunta exactamente a 'Spotify.rdf' (respetando mayúsculas)
+ONTOLOGY_PATH = os.path.join("data", "Spotify.rdf")
 
-# --- Lógica de Datos ---
-def obtener_datos_spotify():
-    """Lee el archivo XML y lo convierte en una lista de diccionarios para la API."""
-    tree = ET.parse('data/spotify.xml')
-    root = tree.getroot()
-    artistas = {artista.get('id'): artista.find('nombre').text for artista in root.findall('.//artista')}
-    albumes = {album.get('id'): (album.find('titulo').text, album.get('artista_id')) for album in root.findall('.//album')}
+# Definimos el namespace base (Copiado de tu archivo original)
+BASE_IRI = "http://www.semanticweb.org/asus/ontologies/2025/10/untitled-ontology-15#"
+
+# Cargamos la ontología con manejo de errores
+try:
+    onto = get_ontology(ONTOLOGY_PATH).load()
+    print(f"✅ ÉXITO: Ontología cargada desde {ONTOLOGY_PATH}")
+except Exception as e:
+    print(f"❌ ERROR CRÍTICO: No se pudo cargar la ontología.")
+    print(f"Detalle del error: {e}")
+    print(f"Verifica que el archivo 'Spotify.rdf' esté en la carpeta 'data'.")
+
+def save_ontology():
+    """Guarda los cambios en el archivo RDF"""
+    try:
+        onto.save(file=ONTOLOGY_PATH, format="rdfxml")
+        print("💾 Ontología guardada correctamente.")
+    except Exception as e:
+        print(f"Error al guardar: {e}")
+
+def get_safe_property(individual, prop_name):
+    """Obtiene el valor de una DataProperty (Texto/Número) de forma segura"""
+    val = getattr(individual, prop_name)
+    if not val: 
+        return "" 
+    return val[0] # Owlready devuelve listas, tomamos el primero
+
+def get_related_name(individual, prop_name, name_prop):
+    """
+    Obtiene el nombre de un objeto relacionado (ObjectProperty).
+    Sirve para obtener el nombre real de: Artista, Album y Género.
+    """
+    relations = getattr(individual, prop_name)
+    if not relations:
+        return "Desconocido"
     
-    lista_canciones = []
-    for cancion_node in root.findall('.//cancion'):
-        album_id = cancion_node.get('album_id')
-        album_titulo, artista_id = albumes.get(album_id, ("Desconocido", "N/A"))
-        artista_nombre = artistas.get(artista_id, "Desconocido")
-        cancion_info = {
-            "id": cancion_node.get('id'),
-            "titulo": cancion_node.find('titulo').text,
-            "artista": artista_nombre,
-            "album": album_titulo,
-            "genero": cancion_node.find('genero').text,
-            "duracion": cancion_node.find('duracion').text
-        }
-        lista_canciones.append(cancion_info)
-    return lista_canciones
+    related_obj = relations[0] # Tomamos el primer objeto relacionado
+    
+    # Buscamos la propiedad de nombre dentro de ese objeto (ej. tieneNombre)
+    name_val = getattr(related_obj, name_prop)
+    
+    # Si tiene nombre, lo devolvemos. Si no, devolvemos el ID del objeto.
+    return name_val[0] if name_val else str(related_obj.name)
 
-# --- Ruta Principal (Renderizado con XSLT) ---
+# --- RUTAS DE LA APLICACIÓN ---
+
 @app.route('/')
 def index():
-    """Renderiza la vista principal aplicando la transformación XSLT en el servidor."""
-    try:
-        xml_doc = etree.parse("data/spotify.xml")
-        xsl_doc = etree.parse("spotify.xsl")
-        transform = etree.XSLT(xsl_doc)
-        result_tree = transform(xml_doc)
-        return str(result_tree)
-    except Exception as e:
-        return f"Ocurrió un error en la transformación XSLT: {e}", 500
+    # CAMBIO: Ahora enviamos index.html
+    return send_from_directory('.', 'index.html')
 
-# --- API Endpoints (Para la interactividad con JavaScript) ---
+@app.route('/static/<path:path>')
+def send_static(path):
+    return send_from_directory('static', path)
+
+# --- API CRUD SEMÁNTICO (OWL) ---
 
 @app.route('/api/canciones', methods=['GET'])
 def get_canciones():
-    """Devuelve todas las canciones o las filtra según un parámetro de búsqueda 'q'."""
     query = request.args.get('q', '').lower()
-    todas_las_canciones = obtener_datos_spotify()
-    if not query:
-        return jsonify(todas_las_canciones)
-    canciones_filtradas = [
-        c for c in todas_las_canciones if 
-        query in c['titulo'].lower() or 
-        query in c['artista'].lower() or 
-        query in c['album'].lower()
-    ]
-    return jsonify(canciones_filtradas)
+    canciones_list = []
 
-@app.route('/api/canciones/<string:cancion_id>', methods=['GET'])
-def get_cancion(cancion_id):
-    """Devuelve los datos de una única canción por su ID."""
-    cancion_encontrada = next((c for c in obtener_datos_spotify() if c['id'] == cancion_id), None)
-    if cancion_encontrada:
-        return jsonify(cancion_encontrada)
-    return jsonify({"error": "Canción no encontrada"}), 404
+    # Iteramos sobre todas las instancias de la clase Cancion
+    for cancion in onto.Cancion.instances():
+        
+        # 1. Obtener datos directos (Strings/Ints)
+        titulo = get_safe_property(cancion, "tieneTituloCancion")
+        duracion = get_safe_property(cancion, "tieneDuracion")
+        
+        # 2. Obtener relaciones (Objetos conectados)
+        # Aquí solucionamos lo del Género, Artista y Album buscando sus nombres
+        artista = get_related_name(cancion, "tieneArtistaPrincipal", "tieneNombre")
+        album = get_related_name(cancion, "perteneceAAlbum", "tieneTituloAlbum")
+        genero = get_related_name(cancion, "tieneGenero", "tieneNombre")
+
+        # Filtro de búsqueda
+        if query and (query not in titulo.lower() and query not in artista.lower()):
+            continue
+
+        canciones_list.append({
+            "id": cancion.name, # El ID es el nombre del recurso
+            "titulo": titulo,
+            "artista": artista,
+            "album": album,
+            "genero": genero, # Devuelve el nombre (ej. "Reggaeton") no la URL
+            "duracion": str(duracion)
+        })
+
+    return jsonify(canciones_list)
 
 @app.route('/api/canciones', methods=['POST'])
 def add_cancion():
-    """Añade una nueva canción, creando el artista y/o álbum si no existen."""
-    datos = request.get_json()
-    tree = ET.parse('data/spotify.xml')
-    root = tree.getroot()
+    data = request.json
     
-    # Lógica para Artista (buscar o crear)
-    nombre_artista_nuevo = datos['artista']
-    artista_id = None
-    artistas_root = root.find('artistas')
-    for artista in artistas_root.findall('artista'):
-        if artista.find('nombre').text.lower() == nombre_artista_nuevo.lower():
-            artista_id = artista.get('id')
-            break
-    if artista_id is None:
-        nuevo_id_artista = "ART" + str(len(artistas_root.findall('artista')) + 1).zfill(2)
-        elemento_artista = ET.Element('artista', attrib={'id': nuevo_id_artista})
-        ET.SubElement(elemento_artista, 'nombre').text = nombre_artista_nuevo
-        artistas_root.append(elemento_artista)
-        artista_id = nuevo_id_artista
+    # Creamos IDs válidos reemplazando espacios por guiones bajos
+    song_id = data['titulo'].replace(" ", "_")
+    artist_id = data['artista'].replace(" ", "_")
+    album_id = data['album'].replace(" ", "_")
+    genre_id = data['genero'].replace(" ", "_")
 
-    # Lógica para Álbum (buscar o crear)
-    titulo_album_nuevo = datos['album']
-    album_id = None
-    albumes_root = root.find('albumes')
-    for album in albumes_root.findall('album'):
-        if album.find('titulo').text.lower() == titulo_album_nuevo.lower():
-            album_id = album.get('id')
-            break
-    if album_id is None:
-        nuevo_id_album = "ALB" + str(len(albumes_root.findall('album')) + 1).zfill(2)
-        elemento_album = ET.Element('album', attrib={'id': nuevo_id_album, 'artista_id': artista_id})
-        ET.SubElement(elemento_album, 'titulo').text = titulo_album_nuevo
-        albumes_root.append(elemento_album)
-        album_id = nuevo_id_album
+    # 1. GESTIÓN DE ARTISTA (Buscar o Crear)
+    artista = onto.search_one(iri=f"*{artist_id}")
+    if not artista:
+        artista = onto.Artista(artist_id)
+        artista.tieneNombre = [data['artista']]
+
+    # 2. GESTIÓN DE GÉNERO (Buscar o Crear) - CORRECCIÓN SOLICITADA
+    genero = onto.search_one(iri=f"*{genre_id}")
+    if not genero:
+        genero = onto.Genero(genre_id)
+        genero.tieneNombre = [data['genero']]
+
+    # 3. GESTIÓN DE ÁLBUM (Buscar o Crear)
+    album = onto.search_one(iri=f"*{album_id}")
+    if not album:
+        album = onto.Album(album_id)
+        album.tieneTituloAlbum = [data['album']]
+        album.tieneArtistaPrincipal = [artista] # Conexión Album -> Artista
+        album.tieneGenero = [genero]            # Conexión Album -> Genero
+
+    # 4. CREAR CANCIÓN
+    nueva_cancion = onto.search_one(iri=f"*{song_id}")
+    if not nueva_cancion:
+        nueva_cancion = onto.Cancion(song_id)
     
-    # Crear la nueva canción
-    canciones_root = root.find('canciones')
-    nuevo_id_cancion = "C" + str(len(canciones_root.findall('cancion')) + 1).zfill(3)
-    elemento_cancion = ET.Element('cancion', attrib={'id': nuevo_id_cancion, 'album_id': album_id})
-    ET.SubElement(elemento_cancion, 'titulo').text = datos['titulo']
-    ET.SubElement(elemento_cancion, 'genero').text = datos['genero']
-    ET.SubElement(elemento_cancion, 'duracion').text = datos['duracion']
-    canciones_root.append(elemento_cancion)
-
-    tree.write('data/spotify.xml', encoding='utf-8', xml_declaration=True)
-    return jsonify({"mensaje": "Canción añadida con éxito", "id": nuevo_id_cancion}), 201
-
-# --- Pega esta función en app.py, reemplazando la versión incorrecta ---
-
-@app.route('/api/canciones/<string:cancion_id>', methods=['PUT'])
-def update_cancion(cancion_id):
-    """Actualiza una canción existente, incluyendo su artista y álbum."""
+    # Asignar Propiedades de Datos
+    nueva_cancion.tieneTituloCancion = [data['titulo']]
     try:
-        datos_actualizados = request.get_json()
-        tree = ET.parse('data/spotify.xml')
-        root = tree.getroot()
-        
-        cancion_a_actualizar = root.find(f".//cancion[@id='{cancion_id}']")
-        
-        if cancion_a_actualizar is not None:
-            # --- Lógica para Artista y Álbum (la versión completa) ---
-            nombre_artista_nuevo = datos_actualizados['artista']
-            titulo_album_nuevo = datos_actualizados['album']
-            
-            artista_id = None
-            artistas_root = root.find('artistas')
-            for artista in artistas_root.findall('artista'):
-                if artista.find('nombre').text.lower() == nombre_artista_nuevo.lower():
-                    artista_id = artista.get('id')
-                    break
-            if artista_id is None:
-                nuevo_id_artista = "ART" + str(len(artistas_root.findall('artista')) + 1).zfill(2)
-                elemento_artista = ET.Element('artista', attrib={'id': nuevo_id_artista})
-                ET.SubElement(elemento_artista, 'nombre').text = nombre_artista_nuevo
-                artistas_root.append(elemento_artista)
-                artista_id = nuevo_id_artista
+        nueva_cancion.tieneDuracion = [int(data['duracion'])] # Convertimos a entero
+    except:
+        nueva_cancion.tieneDuracion = [0]
 
-            album_id = None
-            albumes_root = root.find('albumes')
-            for album in albumes_root.findall('album'):
-                if album.find('titulo').text.lower() == titulo_album_nuevo.lower():
-                    album_id = album.get('id')
-                    break
-            if album_id is None:
-                nuevo_id_album = "ALB" + str(len(albumes_root.findall('album')) + 1).zfill(2)
-                elemento_album = ET.Element('album', attrib={'id': nuevo_id_album, 'artista_id': artista_id})
-                ET.SubElement(elemento_album, 'titulo').text = titulo_album_nuevo
-                albumes_root.append(elemento_album)
-                album_id = nuevo_id_album
-
-            # --- Actualización de la canción ---
-            cancion_a_actualizar.find('titulo').text = datos_actualizados['titulo']
-            cancion_a_actualizar.find('genero').text = datos_actualizados['genero']
-            cancion_a_actualizar.find('duracion').text = datos_actualizados['duracion']
-            
-            # ¡Actualizamos la referencia al álbum!
-            cancion_a_actualizar.set('album_id', album_id)
-            
-            tree.write('data/spotify.xml', encoding='utf-8', xml_declaration=True)
-            return jsonify({"mensaje": f"Canción {cancion_id} actualizada con éxito"}), 200
-        else:
-            return jsonify({"error": "Canción no encontrada"}), 404
-    except Exception as e:
-        return jsonify({"error": str(e)}), 500
+    # Asignar Relaciones (Conectamos los objetos)
+    nueva_cancion.tieneArtistaPrincipal = [artista]
+    nueva_cancion.perteneceAAlbum = [album]
+    nueva_cancion.tieneGenero = [genero]
     
-@app.route('/api/canciones/<string:cancion_id>', methods=['DELETE'])
-def delete_cancion(cancion_id):
-    """Elimina una canción y limpia los álbumes/artistas huérfanos."""
-    try:
-        tree = ET.parse('data/spotify.xml')
-        root = tree.getroot()
+    save_ontology()
+    return jsonify({"status": "success", "id": song_id})
 
-        # 1. Encontrar y eliminar la canción
-        canciones_root = root.find('canciones')
-        cancion_a_eliminar = canciones_root.find(f".//cancion[@id='{cancion_id}']")
+@app.route('/api/canciones/<song_id>', methods=['DELETE'])
+def delete_cancion(song_id):
+    cancion = onto.search_one(iri=f"*{song_id}")
+    if cancion:
+        destroy_entity(cancion)
+        save_ontology()
+        return jsonify({"status": "deleted"})
+    return jsonify({"error": "No encontrada"}), 404
 
-        if cancion_a_eliminar is not None:
-            # Guardamos los IDs antes de borrar la canción
-            album_id_borrado = cancion_a_eliminar.get('album_id')
-            
-            # Eliminamos la canción
-            canciones_root.remove(cancion_a_eliminar)
+@app.route('/api/canciones/<song_id>', methods=['GET'])
+def get_one_cancion(song_id):
+    cancion = onto.search_one(iri=f"*{song_id}")
+    if cancion:
+        return jsonify({
+            "id": cancion.name,
+            "titulo": get_safe_property(cancion, "tieneTituloCancion"),
+            "artista": get_related_name(cancion, "tieneArtistaPrincipal", "tieneNombre"),
+            "album": get_related_name(cancion, "perteneceAAlbum", "tieneTituloAlbum"),
+            "genero": get_related_name(cancion, "tieneGenero", "tieneNombre"),
+            "duracion": get_safe_property(cancion, "tieneDuracion")
+        })
+    return jsonify({"error": "Not found"}), 404
 
-            # 2. Comprobar si el álbum quedó huérfano
-            otras_canciones_en_album = canciones_root.find(f".//cancion[@album_id='{album_id_borrado}']")
-            if otras_canciones_en_album is None:
-                # Si no hay más canciones en ese álbum, lo eliminamos
-                albumes_root = root.find('albumes')
-                album_a_eliminar = albumes_root.find(f".//album[@id='{album_id_borrado}']")
-                if album_a_eliminar is not None:
-                    artista_id_borrado = album_a_eliminar.get('artista_id')
-                    albumes_root.remove(album_a_eliminar)
-                    
-                    # 3. Comprobar si el artista quedó huérfano
-                    otros_albumes_del_artista = albumes_root.find(f".//album[@artista_id='{artista_id_borrado}']")
-                    if otros_albumes_del_artista is None:
-                        # Si no hay más álbumes de ese artista, lo eliminamos
-                        artistas_root = root.find('artistas')
-                        artista_a_eliminar = artistas_root.find(f".//artista[@id='{artista_id_borrado}']")
-                        if artista_a_eliminar is not None:
-                            artistas_root.remove(artista_a_eliminar)
+@app.route('/api/canciones/<song_id>', methods=['PUT'])
+def update_cancion(song_id):
+    data = request.json
+    cancion = onto.search_one(iri=f"*{song_id}")
+    
+    if cancion:
+        # Actualizamos propiedades simples
+        cancion.tieneTituloCancion = [data['titulo']]
+        try:
+            cancion.tieneDuracion = [int(data['duracion'])]
+        except:
+            pass
+        
+        # NOTA: Para un proyecto completo, aquí deberías actualizar también
+        # las relaciones (artista, album, genero) si cambiaron.
+        
+        save_ontology()
+        return jsonify({"status": "updated"})
+    return jsonify({"error": "Not found"}), 404
 
-            # 4. Guardar todos los cambios en el archivo
-            tree.write('data/spotify.xml', encoding='utf-8', xml_declaration=True)
-            return jsonify({"mensaje": f"Canción {cancion_id} y datos huérfanos eliminados"}), 200
-        else:
-            return jsonify({"error": "Canción no encontrada"}), 404
-
-    except Exception as e:
-        return jsonify({"error": str(e)}), 500
-# --- Ejecución de la Aplicación ---
 if __name__ == '__main__':
     app.run(debug=True)

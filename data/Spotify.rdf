@@ -1,0 +1,554 @@
+<?xml version="1.0"?>
+<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+         xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+         xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+         xmlns:owl="http://www.w3.org/2002/07/owl#"
+         xml:base="http://www.semanticweb.org/asus/ontologies/2025/10/untitled-ontology-15"
+         xmlns="http://www.semanticweb.org/asus/ontologies/2025/10/untitled-ontology-15#">
+
+<owl:Ontology rdf:about="http://www.semanticweb.org/asus/ontologies/2025/10/untitled-ontology-15"/>
+
+<owl:ObjectProperty rdf:about="#esCreadaPor">
+  <rdfs:domain>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#esCreadaPor"/>
+      <owl:someValuesFrom rdf:resource="#Playlist"/>
+    </owl:Restriction>
+  </rdfs:domain>
+  <rdfs:range>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#esCreadaPor"/>
+      <owl:someValuesFrom rdf:resource="#Usuario"/>
+    </owl:Restriction>
+  </rdfs:range>
+</owl:ObjectProperty>
+
+<owl:ObjectProperty rdf:about="#esSubgeneroDe">
+  <rdfs:domain>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#esSubgeneroDe"/>
+      <owl:someValuesFrom rdf:resource="#Genero"/>
+    </owl:Restriction>
+  </rdfs:domain>
+  <rdfs:range>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#esSubgeneroDe"/>
+      <owl:someValuesFrom rdf:resource="#Genero"/>
+    </owl:Restriction>
+  </rdfs:range>
+</owl:ObjectProperty>
+
+<owl:ObjectProperty rdf:about="#perteneceAAlbum">
+  <rdfs:domain>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#perteneceAAlbum"/>
+      <owl:someValuesFrom rdf:resource="#Cancion"/>
+    </owl:Restriction>
+  </rdfs:domain>
+  <rdfs:range>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#perteneceAAlbum"/>
+      <owl:someValuesFrom rdf:resource="#Album"/>
+    </owl:Restriction>
+  </rdfs:range>
+</owl:ObjectProperty>
+
+<owl:ObjectProperty rdf:about="#perteneceADiscografica">
+  <rdfs:domain>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#perteneceADiscografica"/>
+      <owl:someValuesFrom rdf:resource="#Album"/>
+    </owl:Restriction>
+  </rdfs:domain>
+  <rdfs:domain>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#perteneceADiscografica"/>
+      <owl:someValuesFrom rdf:resource="#Artista"/>
+    </owl:Restriction>
+  </rdfs:domain>
+  <rdfs:range>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#perteneceADiscografica"/>
+      <owl:someValuesFrom rdf:resource="#Dsicografia"/>
+    </owl:Restriction>
+  </rdfs:range>
+</owl:ObjectProperty>
+
+<owl:ObjectProperty rdf:about="#sigueA">
+  <rdfs:domain>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#sigueA"/>
+      <owl:someValuesFrom rdf:resource="#Usuario"/>
+    </owl:Restriction>
+  </rdfs:domain>
+  <rdfs:range>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#sigueA"/>
+      <owl:someValuesFrom rdf:resource="#Artista"/>
+    </owl:Restriction>
+  </rdfs:range>
+</owl:ObjectProperty>
+
+<owl:ObjectProperty rdf:about="#tieneAlbum">
+  <rdfs:domain>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#tieneAlbum"/>
+      <owl:someValuesFrom rdf:resource="#Artista"/>
+    </owl:Restriction>
+  </rdfs:domain>
+  <rdfs:range>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#tieneAlbum"/>
+      <owl:someValuesFrom rdf:resource="#Album"/>
+    </owl:Restriction>
+  </rdfs:range>
+</owl:ObjectProperty>
+
+<owl:ObjectProperty rdf:about="#tieneArtistaInvitado">
+  <rdfs:domain>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#tieneArtistaInvitado"/>
+      <owl:someValuesFrom rdf:resource="#Cancion"/>
+    </owl:Restriction>
+  </rdfs:domain>
+  <rdfs:range>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#tieneArtistaInvitado"/>
+      <owl:someValuesFrom rdf:resource="#Artista"/>
+    </owl:Restriction>
+  </rdfs:range>
+</owl:ObjectProperty>
+
+<owl:ObjectProperty rdf:about="#tieneArtistaPrincipal">
+  <rdfs:domain>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#tieneArtistaPrincipal"/>
+      <owl:someValuesFrom rdf:resource="#Album"/>
+    </owl:Restriction>
+  </rdfs:domain>
+  <rdfs:domain>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#tieneArtistaPrincipal"/>
+      <owl:someValuesFrom rdf:resource="#Cancion"/>
+    </owl:Restriction>
+  </rdfs:domain>
+  <rdfs:range>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#tieneArtistaPrincipal"/>
+      <owl:someValuesFrom rdf:resource="#Artista"/>
+    </owl:Restriction>
+  </rdfs:range>
+</owl:ObjectProperty>
+
+<owl:ObjectProperty rdf:about="#tieneCancion">
+  <rdfs:domain>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#tieneGenero"/>
+      <owl:someValuesFrom rdf:resource="#Album"/>
+    </owl:Restriction>
+  </rdfs:domain>
+  <rdfs:domain>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#tieneGenero"/>
+      <owl:someValuesFrom rdf:resource="#Playlist"/>
+    </owl:Restriction>
+  </rdfs:domain>
+  <rdfs:range>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#tieneCancion"/>
+      <owl:someValuesFrom rdf:resource="#Cancion"/>
+    </owl:Restriction>
+  </rdfs:range>
+</owl:ObjectProperty>
+
+<owl:ObjectProperty rdf:about="#tieneGenero">
+  <rdfs:domain>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#tieneGenero"/>
+      <owl:someValuesFrom rdf:resource="#Album"/>
+    </owl:Restriction>
+  </rdfs:domain>
+  <rdfs:domain>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#tieneGenero"/>
+      <owl:someValuesFrom rdf:resource="#Artista"/>
+    </owl:Restriction>
+  </rdfs:domain>
+  <rdfs:domain>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#tieneGenero"/>
+      <owl:someValuesFrom rdf:resource="#Cancion"/>
+    </owl:Restriction>
+  </rdfs:domain>
+  <rdfs:range>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#tieneGenero"/>
+      <owl:someValuesFrom rdf:resource="#Genero"/>
+    </owl:Restriction>
+  </rdfs:range>
+</owl:ObjectProperty>
+
+<owl:ObjectProperty rdf:about="#tieneCompositor">
+  <rdfs:domain>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#tieneCompositor"/>
+      <owl:someValuesFrom rdf:resource="#Cancion"/>
+    </owl:Restriction>
+  </rdfs:domain>
+  <rdfs:range>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#tieneCompositor"/>
+      <owl:someValuesFrom rdf:resource="#Compositor"/>
+    </owl:Restriction>
+  </rdfs:range>
+</owl:ObjectProperty>
+
+<owl:ObjectProperty rdf:about="#tieneEscritor">
+  <rdfs:domain>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#tieneEscritor"/>
+      <owl:someValuesFrom rdf:resource="#Cancion"/>
+    </owl:Restriction>
+  </rdfs:domain>
+  <rdfs:range>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#tieneEscritor"/>
+      <owl:someValuesFrom rdf:resource="#Escritor"/>
+    </owl:Restriction>
+  </rdfs:range>
+</owl:ObjectProperty>
+
+<owl:ObjectProperty rdf:about="#tieneMiembro">
+  <rdfs:domain>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#tieneMiembro"/>
+      <owl:someValuesFrom rdf:resource="#Artista"/>
+    </owl:Restriction>
+  </rdfs:domain>
+  <rdfs:range>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#tieneMiembro"/>
+      <owl:someValuesFrom rdf:resource="#Artista"/>
+    </owl:Restriction>
+  </rdfs:range>
+</owl:ObjectProperty>
+
+<owl:ObjectProperty rdf:about="#tienePlaylist">
+  <rdfs:domain>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#tienePlaylist"/>
+      <owl:someValuesFrom rdf:resource="#Usuario"/>
+    </owl:Restriction>
+  </rdfs:domain>
+  <rdfs:range>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#tienePlaylist"/>
+      <owl:someValuesFrom rdf:resource="#Playlist"/>
+    </owl:Restriction>
+  </rdfs:range>
+</owl:ObjectProperty>
+
+<owl:ObjectProperty rdf:about="#tieneProductor">
+  <rdfs:domain>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#tieneProductor"/>
+      <owl:someValuesFrom rdf:resource="#Album"/>
+    </owl:Restriction>
+  </rdfs:domain>
+  <rdfs:domain>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#tieneProductor"/>
+      <owl:someValuesFrom rdf:resource="#Cancion"/>
+    </owl:Restriction>
+  </rdfs:domain>
+  <rdfs:range>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#tieneProductor"/>
+      <owl:someValuesFrom rdf:resource="#productor"/>
+    </owl:Restriction>
+  </rdfs:range>
+</owl:ObjectProperty>
+
+<owl:DatatypeProperty rdf:about="#tieneBiografia">
+  <rdfs:domain rdf:resource="#Persona_Musical"/>
+  <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="#tieneDescripcion">
+  <rdfs:domain rdf:resource="#Genero"/>
+  <rdfs:domain rdf:resource="#Playlist"/>
+  <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="#tieneDuracion">
+  <rdfs:domain rdf:resource="#Cancion"/>
+  <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#integer"/>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="#tieneEmail">
+  <rdfs:domain rdf:resource="#Usuario"/>
+  <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="#tieneEspecialidad">
+  <rdfs:domain rdf:resource="#Compositor"/>
+  <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="#tieneEstiloProduccion">
+  <rdfs:domain rdf:resource="#productor"/>
+  <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="#tieneEstudio">
+  <rdfs:domain rdf:resource="#productor"/>
+  <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="#tieneFechaCreacion">
+  <rdfs:domain rdf:resource="#Playlist"/>
+  <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#dateTime"/>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="#tieneFechaGrabacion">
+  <rdfs:domain rdf:resource="#Cancion"/>
+  <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#dateTime"/>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="#tieneFechaLanzamiento">
+  <rdfs:domain rdf:resource="#Album"/>
+  <rdfs:domain rdf:resource="#Cancion"/>
+  <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#dateTime"/>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="#tieneFechaNacimiento">
+  <rdfs:domain rdf:resource="#Persona_Musical"/>
+  <rdfs:domain rdf:resource="#Usuario"/>
+  <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#dateTime"/>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="#tieneFechaRegistro">
+  <rdfs:domain rdf:resource="#Usuario"/>
+  <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#dateTime"/>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="#tieneIdiomas">
+  <rdfs:domain rdf:resource="#Escritor"/>
+  <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="#tieneImagenPerfil">
+  <rdfs:domain rdf:resource="#Artista"/>
+  <rdfs:domain rdf:resource="#Usuario"/>
+  <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="#tieneImagenPortada">
+  <rdfs:domain rdf:resource="#Playlist"/>
+  <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="#tieneLetra">
+  <rdfs:domain rdf:resource="#Cancion"/>
+  <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="#tieneNacionalidad">
+  <rdfs:domain rdf:resource="#Persona_Musical"/>
+  <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="#tieneNombre">
+  <rdfs:domain rdf:resource="#Dsicografia"/>
+  <rdfs:domain rdf:resource="#Genero"/>
+  <rdfs:domain rdf:resource="#Persona_Musical"/>
+  <rdfs:domain rdf:resource="#Usuario"/>
+  <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="#tieneNombreArtistico">
+  <rdfs:domain rdf:resource="#Artista"/>
+  <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="#tieneNumeroPista">
+  <rdfs:domain rdf:resource="#Cancion"/>
+  <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="#tienePaisOrigen">
+  <rdfs:domain rdf:resource="#Dsicografia"/>
+  <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="#tienePlan">
+  <rdfs:domain rdf:resource="#Usuario"/>
+  <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="#tienePortada">
+  <rdfs:domain rdf:resource="#Album"/>
+  <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="#tieneRating">
+  <rdfs:domain rdf:resource="#Album"/>
+  <rdfs:domain rdf:resource="#Cancion"/>
+  <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#double"/>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="#tieneReproducciones">
+  <rdfs:domain rdf:resource="#Cancion"/>
+  <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#integer"/>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="#tieneSeguidores">
+  <rdfs:domain rdf:resource="#Artista"/>
+  <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#integer"/>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="#tieneSitioWeb">
+  <rdfs:domain rdf:resource="#Dsicografia"/>
+  <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="#tieneTipoArtista">
+  <rdfs:domain rdf:resource="#Artista"/>
+  <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="#tieneTituloAlbum">
+  <rdfs:domain rdf:resource="#Album"/>
+  <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="#tieneTituloCancion">
+  <rdfs:domain rdf:resource="#Cancion"/>
+  <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="#tieneTituloPlaylist">
+  <rdfs:domain rdf:resource="#Playlist"/>
+  <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="#tieneTituloSingle">
+  <rdfs:domain rdf:resource="#Single"/>
+  <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="#tieneVisibilidad">
+  <rdfs:domain rdf:resource="#Playlist"/>
+  <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+</owl:DatatypeProperty>
+
+<owl:Class rdf:about="#Playlist">
+  <rdfs:subClassOf rdf:resource="#RecursoUsuario"/>
+</owl:Class>
+
+<owl:Class rdf:about="#Usuario">
+  <rdfs:subClassOf rdf:resource="#Persona"/>
+</owl:Class>
+
+<owl:Class rdf:about="#Genero">
+  <rdfs:subClassOf rdf:resource="#Ent_Organizacion"/>
+</owl:Class>
+
+<owl:Class rdf:about="#Cancion">
+  <rdfs:subClassOf rdf:resource="#Contenido_Musical"/>
+</owl:Class>
+
+<owl:Class rdf:about="#Album">
+  <rdfs:subClassOf rdf:resource="#Contenido_Musical"/>
+</owl:Class>
+
+<owl:Class rdf:about="#Artista">
+  <rdfs:subClassOf rdf:resource="#Persona_Musical"/>
+</owl:Class>
+
+<owl:Class rdf:about="#Dsicografia">
+  <rdfs:subClassOf rdf:resource="#Ent_Organizacion"/>
+</owl:Class>
+
+<owl:Class rdf:about="#Compositor">
+  <rdfs:subClassOf rdf:resource="#Persona_Musical"/>
+</owl:Class>
+
+<owl:Class rdf:about="#Escritor">
+  <rdfs:subClassOf rdf:resource="#Persona_Musical"/>
+</owl:Class>
+
+<owl:Class rdf:about="#productor">
+  <rdfs:subClassOf rdf:resource="#Persona_Musical"/>
+</owl:Class>
+
+<owl:Class rdf:about="#Persona_Musical">
+  <rdfs:subClassOf rdf:resource="#Persona"/>
+  <owl:disjointWith rdf:resource="#Usuario"/>
+</owl:Class>
+
+<owl:Class rdf:about="#Single">
+  <rdfs:subClassOf rdf:resource="#Album"/>
+</owl:Class>
+
+<owl:Class rdf:about="#Contenido_Musical"/>
+
+<owl:Class rdf:about="#Ent_Organizacion"/>
+
+<owl:Class rdf:about="#Persona"/>
+
+<owl:Class rdf:about="#RecursoUsuario"/>
+
+<owl:NamedIndividual rdf:about="#Bad_Bunny">
+  <rdf:type rdf:resource="#Artista"/>
+  <tieneGenero rdf:resource="#Reggaeton"/>
+  <tieneNombre rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Benito Antonio Martínez Ocasio</tieneNombre>
+  <tieneNombreArtistico rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Bad Bunny</tieneNombreArtistico>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#Reggaeton">
+  <rdf:type rdf:resource="#Genero"/>
+  <tieneNombre rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Reggaeton</tieneNombre>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#Ojitos_Lindos">
+  <rdf:type rdf:resource="#Cancion"/>
+  <tieneArtistaPrincipal rdf:resource="#Bad_Bunny"/>
+  <tieneDuracion rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">419.0</tieneDuracion>
+  <tieneTituloCancion rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Ojitos Lindos</tieneTituloCancion>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#Un_Verano_Sin_Ti">
+  <rdf:type rdf:resource="#Album"/>
+  <tieneArtistaPrincipal rdf:resource="#Bad_Bunny"/>
+  <tieneTituloAlbum rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Un Verano Sin Ti</tieneTituloAlbum>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#Grover_Washington_Jr">
+  <rdf:type rdf:resource="#Artista"/>
+  <tieneNombre rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Grover Washington Jr</tieneNombre>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#jazz">
+  <rdf:type rdf:resource="#Genero"/>
+  <tieneNombre rdf:datatype="http://www.w3.org/2001/XMLSchema#string">jazz</tieneNombre>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#Winelight">
+  <rdf:type rdf:resource="#Album"/>
+  <tieneArtistaPrincipal rdf:resource="#Grover_Washington_Jr"/>
+  <tieneGenero rdf:resource="#jazz"/>
+  <tieneTituloAlbum rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Winelight</tieneTituloAlbum>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#Just_the_two_of_us">
+  <rdf:type rdf:resource="#Cancion"/>
+  <tieneArtistaPrincipal rdf:resource="#Grover_Washington_Jr"/>
+  <perteneceAAlbum rdf:resource="#Winelight"/>
+  <tieneGenero rdf:resource="#jazz"/>
+  <tieneTituloCancion rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Just the two of us</tieneTituloCancion>
+  <tieneDuracion rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">0</tieneDuracion>
+</owl:NamedIndividual>
+
+
+</rdf:RDF>

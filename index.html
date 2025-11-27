@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mini Spotify OWL</title>
+    <link rel="stylesheet" type="text/css" href="/static/style.css"/>
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1>Mini Spotify (OWL Edition)</h1>
+        </header>
+
+        <!-- SECCIÓN DE FORMULARIOS -->
+        <section class="section">
+            <div class="add-song-form">
+                <form id="form-busqueda">
+                    <input type="search" id="input-busqueda" placeholder="Buscar en Todas las Canciones..."/>
+                </form>
+                <hr/>
+                <form id="form-anadir-cancion">
+                    <input type="text" id="titulo" placeholder="Título" required="required"/>
+                    <input type="text" id="artista_nombre" placeholder="Artista" required="required"/>
+                    <input type="text" id="album_titulo" placeholder="Álbum" required="required"/>
+                    <input type="text" id="genero" placeholder="Género" required="required"/>
+                    <input type="text" id="duracion" placeholder="Duración (mm:ss)" required="required"/>
+                    <button type="submit">Guardar Canción</button>
+                </form>
+            </div>
+        </section>
+
+        <!-- 1. SECCIÓN TODAS LAS CANCIONES -->
+        <section class="section" id="seccion-canciones">
+            <h2>Todas las Canciones</h2>
+            <div id="songs-list-container" class="songs-list">
+                <div class="song-header">
+                    <span>TÍTULO</span>
+                    <span>ARTISTA / ÁLBUM</span>
+                    <span>GÉNERO</span>
+                    <span>DURACIÓN</span>
+                    <span>ACCIONES</span>
+                </div>
+                <!-- Las canciones se llenarán aquí con JavaScript -->
+            </div>
+        </section>
+
+        <!-- 2. SECCIÓN ARTISTAS -->
+        <section class="section">
+            <h2>Artistas</h2>
+            <div class="artists-grid" id="artists-container">
+                <!-- Los artistas se llenarán aquí con JavaScript -->
+            </div>
+        </section>
+
+        <!-- 3. SECCIÓN ÁLBUMES -->
+        <section class="section">
+            <h2>Álbumes</h2>
+            <div class="albums-grid" id="albums-container">
+                <!-- Los álbumes se llenarán aquí con JavaScript -->
+            </div>
+        </section>
+    </div>
+    <script src="/static/script.js"></script>
+</body>
+</html>

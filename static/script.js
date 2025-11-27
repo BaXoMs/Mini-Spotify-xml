@@ -1,106 +1,131 @@
 document.addEventListener('DOMContentLoaded', function() {
-    cargarCanciones();
+    cargarDatos();
     configurarFormulario();
-    configurarListaCanciones(); // Renombrado de configurarTabla
+    configurarListaCanciones();
     configurarBusqueda();
 });
 
-// MODIFICADA: Ahora crea DIVs en lugar de filas de tabla <tr>
-function cargarCanciones(query = '') {
-    const songsContainer = document.getElementById('songs-list-container');
-    // Si la API falla o no existe, usa la ruta que tengas configurada
+function cargarDatos(query = '') {
     const url = `/api/canciones?q=${encodeURIComponent(query)}`;
     
     fetch(url)
         .then(response => response.json())
         .then(data => {
-            // Limpiamos solo las filas de canciones, no la cabecera
-            const existingRows = songsContainer.querySelectorAll('.song-row');
-            existingRows.forEach(row => row.remove());
-
-            data.forEach(cancion => {
-                // Creamos un div con la clase 'song-row'
-                const fila = document.createElement('div');
-                fila.classList.add('song-row');
-                
-                // Usamos la estructura de divs que coincide con tu CSS
-                fila.innerHTML = `
-                    <div class="title">${cancion.titulo}</div>
-                    <div>
-                        <span class="song-artist">${cancion.artista}</span><br/>
-                        <span class="song-album">${cancion.album}</span>
-                    </div>
-                    <div><span class="genre-tag">${cancion.genero}</span></div>
-                    <div class="song-duration">${cancion.duracion}</div>
-                    <div>
-                        <button class="btn-editar" data-id="${cancion.id}">Editar</button>
-                        <button class="btn-eliminar" data-id="${cancion.id}">Eliminar</button>
-                    </div>
-                `;
-                songsContainer.appendChild(fila);
-            });
+            renderizarCanciones(data);
+            if (!query) { // Solo regeneramos artistas/albumes si no estamos filtrando
+                renderizarArtistas(data);
+                renderizarAlbumes(data);
+            }
         })
-        .catch(error => console.error('Error al cargar las canciones:', error));
+        .catch(error => console.error('Error:', error));
 }
 
-// MODIFICADA: Ahora incluye la lógica del ENTER para hacer scroll
-function configurarBusqueda() {
-    const inputBusqueda = document.getElementById('input-busqueda');
-    const formBusqueda = document.getElementById('form-busqueda');
+function renderizarCanciones(data) {
+    const container = document.getElementById('songs-list-container');
+    // Limpiamos filas viejas
+    const existingRows = container.querySelectorAll('.song-row');
+    existingRows.forEach(row => row.remove());
 
-    // 1. Búsqueda en tiempo real (mientras escribes)
-    inputBusqueda.addEventListener('input', function() {
-        cargarCanciones(inputBusqueda.value);
+    data.forEach(cancion => {
+        const fila = document.createElement('div');
+        fila.classList.add('song-row');
+        fila.innerHTML = `
+            <div class="title">${cancion.titulo}</div>
+            <div>
+                <span class="song-artist">${cancion.artista}</span><br/>
+                <span class="song-album">${cancion.album}</span>
+            </div>
+            <div><span class="genre-tag">${cancion.genero}</span></div>
+            <div class="song-duration">${cancion.duracion}</div>
+            <div>
+                <button class="btn-editar" data-id="${cancion.id}">Editar</button>
+                <button class="btn-eliminar" data-id="${cancion.id}">Eliminar</button>
+            </div>
+        `;
+        container.appendChild(fila);
     });
+}
 
-    // 2. NUEVO: Al presionar Enter, baja a la sección de canciones
-    inputBusqueda.addEventListener('keydown', function(event) {
-        if (event.key === 'Enter') {
-            event.preventDefault(); // Evita que se recargue la página
-            
-            // Busca la sección por el ID que pusimos en el XSL nuevo
-            const seccionCanciones = document.getElementById('seccion-canciones');
-            
-            if (seccionCanciones) {
-                seccionCanciones.scrollIntoView({ 
-                    behavior: 'smooth', 
-                    block: 'start' 
-                });
-            }
+function renderizarArtistas(data) {
+    const container = document.getElementById('artists-container');
+    container.innerHTML = '';
+    
+    // Extraemos artistas únicos
+    const artistasUnicos = [...new Set(data.map(item => item.artista))];
+
+    artistasUnicos.forEach(artista => {
+        const card = document.createElement('div');
+        card.classList.add('artist-card');
+        card.innerHTML = `
+            <div class="artist-avatar">${artista.charAt(0)}</div>
+            <h3>${artista}</h3>
+            <p class="country">Artista</p>
+        `;
+        container.appendChild(card);
+    });
+}
+
+function renderizarAlbumes(data) {
+    const container = document.getElementById('albums-container');
+    container.innerHTML = '';
+
+    // Extraemos álbumes únicos (usamos un mapa para evitar duplicados por nombre)
+    const albumesMap = new Map();
+    data.forEach(item => {
+        if (!albumesMap.has(item.album)) {
+            albumesMap.set(item.album, item.artista);
         }
     });
 
-    // 3. Prevenir envío tradicional del formulario
-    if (formBusqueda) {
-        formBusqueda.addEventListener('submit', function(e) {
-            e.preventDefault();
-        });
-    }
+    albumesMap.forEach((artista, album) => {
+        const card = document.createElement('div');
+        card.classList.add('album-card');
+        card.innerHTML = `
+            <div class="album-cover">${album.charAt(0)}</div>
+            <div class="album-info">
+                <h3>${album}</h3>
+                <div class="album-id">${artista}</div>
+            </div>
+        `;
+        container.appendChild(card);
+    });
 }
 
-// Renombrada y adaptada para el nuevo contenedor de canciones
+// --- CONFIGURACIONES DE EVENTOS (Igual que antes) ---
+
+function configurarBusqueda() {
+    const input = document.getElementById('input-busqueda');
+    const form = document.getElementById('form-busqueda');
+
+    input.addEventListener('input', () => cargarDatos(input.value));
+    
+    input.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter') {
+            e.preventDefault();
+            document.getElementById('seccion-canciones')?.scrollIntoView({ behavior: 'smooth' });
+        }
+    });
+
+    form?.addEventListener('submit', e => e.preventDefault());
+}
+
 function configurarListaCanciones() {
     const container = document.getElementById('songs-list-container');
-    if (!container) return; // Validación por seguridad
+    if (!container) return;
 
-    container.addEventListener('click', function(event) {
-        const target = event.target;
-        const cancionId = target.dataset.id;
+    container.addEventListener('click', (e) => {
+        const target = e.target;
+        const id = target.dataset.id;
 
         if (target.classList.contains('btn-eliminar')) {
-            if (confirm('¿Estás seguro de que quieres eliminar esta canción?')) {
-                fetch(`/api/canciones/${cancionId}`, { method: 'DELETE' })
-                    .then(response => response.json())
-                    .then(data => {
-                        console.log('Eliminado:', data);
-                        cargarCanciones(document.getElementById('input-busqueda').value);
-                        // Opcional: Recargar la página completa si quieres actualizar artistas/albumes
-                        // window.location.reload(); 
-                    });
+            if (confirm('¿Eliminar canción?')) {
+                fetch(`/api/canciones/${id}`, { method: 'DELETE' })
+                    .then(res => res.json())
+                    .then(() => cargarDatos(document.getElementById('input-busqueda').value));
             }
         } else if (target.classList.contains('btn-editar')) {
-            fetch(`/api/canciones/${cancionId}`)
-                .then(response => response.json())
+            fetch(`/api/canciones/${id}`)
+                .then(res => res.json())
                 .then(cancion => {
                     document.getElementById('titulo').value = cancion.titulo;
                     document.getElementById('artista_nombre').value = cancion.artista;
@@ -111,53 +136,39 @@ function configurarListaCanciones() {
                     const form = document.getElementById('form-anadir-cancion');
                     form.dataset.editingId = cancion.id;
                     form.querySelector('button').textContent = 'Actualizar Canción';
-                    
-                    // Opcional: subir scroll al formulario al dar editar
                     form.scrollIntoView({ behavior: 'smooth' });
                 });
         }
     });
 }
 
-// Las funciones de formulario no necesitan cambios
 function configurarFormulario() {
     const form = document.getElementById('form-anadir-cancion');
-    form.addEventListener('submit', function(event) {
-        event.preventDefault();
-        const cancionId = form.dataset.editingId;
-        const cancionData = {
+    form.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const id = form.dataset.editingId;
+        const data = {
             titulo: document.getElementById('titulo').value,
             artista: document.getElementById('artista_nombre').value,
             album: document.getElementById('album_titulo').value,
             genero: document.getElementById('genero').value,
             duracion: document.getElementById('duracion').value
         };
-        const query = document.getElementById('input-busqueda').value;
 
-        const isUpdating = !!cancionId;
-        const url = isUpdating ? `/api/canciones/${cancionId}` : '/api/canciones';
-        const method = isUpdating ? 'PUT' : 'POST';
+        const method = id ? 'PUT' : 'POST';
+        const url = id ? `/api/canciones/${id}` : '/api/canciones';
 
         fetch(url, {
             method: method,
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(cancionData)
+            body: JSON.stringify(data)
         })
-        .then(response => response.json())
-        .then(data => {
-            console.log('Éxito:', data);
-            resetFormulario();
-            // Si quieres que se actualicen las tarjetas de artistas/albumes nuevos, descomenta:
-            window.location.reload(); 
-            // Si solo quieres actualizar la tabla sin recargar:
-            // cargarCanciones(query);
+        .then(res => res.json())
+        .then(() => {
+            form.reset();
+            delete form.dataset.editingId;
+            form.querySelector('button').textContent = 'Guardar Canción';
+            cargarDatos();
         });
     });
-}
-
-function resetFormulario() {
-    const form = document.getElementById('form-anadir-cancion');
-    form.reset();
-    delete form.dataset.editingId;
-    form.querySelector('button').textContent = 'Guardar Canción';
 }
