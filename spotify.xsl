@@ -19,9 +19,11 @@
                         <h1>Mini Spotify</h1>
                     </header>
 
+                    <!-- SECCIÓN DE FORMULARIOS -->
                     <section class="section">
                         <div class="add-song-form">
                             <form id="form-busqueda">
+                                <!-- El ID input-busqueda es clave para el script -->
                                 <input type="search" id="input-busqueda" placeholder="Buscar en Todas las Canciones..."/>
                             </form>
                             <hr/>
@@ -36,6 +38,23 @@
                         </div>
                     </section>
 
+                    <!-- 1. SECCIÓN TODAS LAS CANCIONES (Movida aquí arriba) -->
+                    <!-- Le agregué id="seccion-canciones" para el scroll automático -->
+                    <section class="section" id="seccion-canciones">
+                        <h2>Todas las Canciones</h2>
+                        <div id="songs-list-container" class="songs-list">
+                            <div class="song-header">
+                                <span>TÍTULO</span>
+                                <span>ARTISTA / ÁLBUM</span>
+                                <span>GÉNERO</span>
+                                <span>DURACIÓN</span>
+                                <span>ACCIONES</span>
+                            </div>
+                            <!-- Aquí se llenan las canciones con JS o XSL si lo agregas -->
+                        </div>
+                    </section>
+
+                    <!-- 2. SECCIÓN ARTISTAS -->
                     <section class="section">
                         <h2>Artistas</h2>
                         <div class="artists-grid">
@@ -57,6 +76,7 @@
                         </div>
                     </section>
 
+                    <!-- 3. SECCIÓN ÁLBUMES -->
                     <section class="section">
                         <h2>Álbumes</h2>
                         <div class="albums-grid">
@@ -78,19 +98,6 @@
                                     </div>
                                 </div>
                             </xsl:for-each>
-                        </div>
-                    </section>
-
-                    <section class="section">
-                        <h2>Todas las Canciones</h2>
-                        <div id="songs-list-container" class="songs-list">
-                            <div class="song-header">
-                                <span>TÍTULO</span>
-                                <span>ARTISTA / ÁLBUM</span>
-                                <span>GÉNERO</span>
-                                <span>DURACIÓN</span>
-                                <span>ACCIONES</span>
-                            </div>
                         </div>
                     </section>
 

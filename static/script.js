@@ -8,6 +8,7 @@ document.addEventListener('DOMContentLoaded', function() {
 // MODIFICADA: Ahora crea DIVs en lugar de filas de tabla <tr>
 function cargarCanciones(query = '') {
     const songsContainer = document.getElementById('songs-list-container');
+    // Si la API falla o no existe, usa la ruta que tengas configurada
     const url = `/api/canciones?q=${encodeURIComponent(query)}`;
     
     fetch(url)
@@ -42,17 +43,47 @@ function cargarCanciones(query = '') {
         .catch(error => console.error('Error al cargar las canciones:', error));
 }
 
-// NUEVA: Configura la barra de búsqueda
+// MODIFICADA: Ahora incluye la lógica del ENTER para hacer scroll
 function configurarBusqueda() {
     const inputBusqueda = document.getElementById('input-busqueda');
+    const formBusqueda = document.getElementById('form-busqueda');
+
+    // 1. Búsqueda en tiempo real (mientras escribes)
     inputBusqueda.addEventListener('input', function() {
         cargarCanciones(inputBusqueda.value);
     });
+
+    // 2. NUEVO: Al presionar Enter, baja a la sección de canciones
+    inputBusqueda.addEventListener('keydown', function(event) {
+        if (event.key === 'Enter') {
+            event.preventDefault(); // Evita que se recargue la página
+            
+            // Busca la sección por el ID que pusimos en el XSL nuevo
+            const seccionCanciones = document.getElementById('seccion-canciones');
+            
+            if (seccionCanciones) {
+                seccionCanciones.scrollIntoView({ 
+                    behavior: 'smooth', 
+                    block: 'start' 
+                });
+            }
+        }
+    });
+
+    // 3. Prevenir envío tradicional del formulario
+    if (formBusqueda) {
+        formBusqueda.addEventListener('submit', function(e) {
+            e.preventDefault();
+        });
+    }
 }
 
 // Renombrada y adaptada para el nuevo contenedor de canciones
 function configurarListaCanciones() {
-    document.getElementById('songs-list-container').addEventListener('click', function(event) {
+    const container = document.getElementById('songs-list-container');
+    if (!container) return; // Validación por seguridad
+
+    container.addEventListener('click', function(event) {
         const target = event.target;
         const cancionId = target.dataset.id;
 
@@ -63,6 +94,8 @@ function configurarListaCanciones() {
                     .then(data => {
                         console.log('Eliminado:', data);
                         cargarCanciones(document.getElementById('input-busqueda').value);
+                        // Opcional: Recargar la página completa si quieres actualizar artistas/albumes
+                        // window.location.reload(); 
                     });
             }
         } else if (target.classList.contains('btn-editar')) {
@@ -78,6 +111,9 @@ function configurarListaCanciones() {
                     const form = document.getElementById('form-anadir-cancion');
                     form.dataset.editingId = cancion.id;
                     form.querySelector('button').textContent = 'Actualizar Canción';
+                    
+                    // Opcional: subir scroll al formulario al dar editar
+                    form.scrollIntoView({ behavior: 'smooth' });
                 });
         }
     });
@@ -111,7 +147,10 @@ function configurarFormulario() {
         .then(data => {
             console.log('Éxito:', data);
             resetFormulario();
-            cargarCanciones(query);
+            // Si quieres que se actualicen las tarjetas de artistas/albumes nuevos, descomenta:
+            window.location.reload(); 
+            // Si solo quieres actualizar la tabla sin recargar:
+            // cargarCanciones(query);
         });
     });
 }

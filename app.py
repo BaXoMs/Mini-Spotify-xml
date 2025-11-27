@@ -8,7 +8,7 @@ from flask import Flask, jsonify, request
 
 # --- Configuración Inicial ---
 load_dotenv()  # Carga las variables del archivo .env
-app = Flask(__name__) # Inicializa la aplicación Flask
+app = Flask(__name__) # Inicializa la aplicación Flaskñ
 
 # --- Lógica de Datos ---
 def obtener_datos_spotify():
