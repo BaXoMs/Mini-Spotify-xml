@@ -491,13 +491,13 @@
   <rdfs:subClassOf rdf:resource="#Album"/>
 </owl:Class>
 
-<owl:Class rdf:about="#Contenido_Musical"/>
-
-<owl:Class rdf:about="#Ent_Organizacion"/>
+<owl:Class rdf:about="#RecursoUsuario"/>
 
 <owl:Class rdf:about="#Persona"/>
 
-<owl:Class rdf:about="#RecursoUsuario"/>
+<owl:Class rdf:about="#Ent_Organizacion"/>
+
+<owl:Class rdf:about="#Contenido_Musical"/>
 
 <owl:NamedIndividual rdf:about="#Bad_Bunny">
   <rdf:type rdf:resource="#Artista"/>
@@ -509,13 +509,6 @@
 <owl:NamedIndividual rdf:about="#Reggaeton">
   <rdf:type rdf:resource="#Genero"/>
   <tieneNombre rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Reggaeton</tieneNombre>
-</owl:NamedIndividual>
-
-<owl:NamedIndividual rdf:about="#Ojitos_Lindos">
-  <rdf:type rdf:resource="#Cancion"/>
-  <tieneArtistaPrincipal rdf:resource="#Bad_Bunny"/>
-  <tieneDuracion rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">419.0</tieneDuracion>
-  <tieneTituloCancion rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Ojitos Lindos</tieneTituloCancion>
 </owl:NamedIndividual>
 
 <owl:NamedIndividual rdf:about="#Un_Verano_Sin_Ti">
@@ -541,13 +534,47 @@
   <tieneTituloAlbum rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Winelight</tieneTituloAlbum>
 </owl:NamedIndividual>
 
-<owl:NamedIndividual rdf:about="#Just_the_two_of_us">
-  <rdf:type rdf:resource="#Cancion"/>
-  <tieneArtistaPrincipal rdf:resource="#Grover_Washington_Jr"/>
-  <perteneceAAlbum rdf:resource="#Winelight"/>
+<owl:NamedIndividual rdf:about="#Grover_">
+  <rdf:type rdf:resource="#Artista"/>
+  <tieneNombre rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Grover </tieneNombre>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#Wine">
+  <rdf:type rdf:resource="#Album"/>
+  <tieneArtistaPrincipal rdf:resource="#Grover_"/>
   <tieneGenero rdf:resource="#jazz"/>
-  <tieneTituloCancion rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Just the two of us</tieneTituloCancion>
-  <tieneDuracion rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">0</tieneDuracion>
+  <tieneTituloAlbum rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Wine</tieneTituloAlbum>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#jaz">
+  <rdf:type rdf:resource="#Genero"/>
+  <tieneNombre rdf:datatype="http://www.w3.org/2001/XMLSchema#string">jaz</tieneNombre>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#Te_quiero_puta">
+  <rdf:type rdf:resource="#Cancion"/>
+  <tieneArtistaPrincipal rdf:resource="#rammste"/>
+  <tieneGenero rdf:resource="#roc"/>
+  <perteneceAAlbum rdf:resource="#put"/>
+  <tieneTituloCancion rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Te quiero </tieneTituloCancion>
+  <tieneDuracion rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">40</tieneDuracion>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#rammste">
+  <rdf:type rdf:resource="#Artista"/>
+  <tieneNombre rdf:datatype="http://www.w3.org/2001/XMLSchema#string">rammste</tieneNombre>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#roc">
+  <rdf:type rdf:resource="#Genero"/>
+  <tieneNombre rdf:datatype="http://www.w3.org/2001/XMLSchema#string">roc</tieneNombre>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#put">
+  <rdf:type rdf:resource="#Album"/>
+  <tieneArtistaPrincipal rdf:resource="#rammste"/>
+  <tieneGenero rdf:resource="#roc"/>
+  <tieneTituloAlbum rdf:datatype="http://www.w3.org/2001/XMLSchema#string">put</tieneTituloAlbum>
 </owl:NamedIndividual>
 
 
