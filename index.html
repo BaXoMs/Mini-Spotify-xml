@@ -3,64 +3,78 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mini Spotify OWL</title>
+    <title>Mini Spotify Semántico</title>
     <link rel="stylesheet" type="text/css" href="/static/style.css"/>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
 <body>
-    <div class="container">
+    <div class="main-container">
         <header class="header">
-            <h1>Mini Spotify (OWL Edition)</h1>
+            <div class="logo">
+                <span class="material-icons">graphic_eq</span> Mini Spotify Semántico
+            </div>
         </header>
 
-        <!-- SECCIÓN DE FORMULARIOS -->
-        <section class="section">
-            <div class="add-song-form">
-                <form id="form-busqueda">
-                    <input type="search" id="input-busqueda" placeholder="Buscar en Todas las Canciones..."/>
-                </form>
-                <hr/>
-                <form id="form-anadir-cancion">
-                    <input type="text" id="titulo" placeholder="Título" required="required"/>
-                    <input type="text" id="artista_nombre" placeholder="Artista" required="required"/>
-                    <input type="text" id="album_titulo" placeholder="Álbum" required="required"/>
-                    <input type="text" id="genero" placeholder="Género" required="required"/>
-                    <input type="text" id="duracion" placeholder="Duración (mm:ss)" required="required"/>
-                    <button type="submit">Guardar Canción</button>
-                </form>
+        <!-- SECCIÓN DE CONTROLES -->
+        <section class="controls-section glass-panel">
+            <div class="search-box">
+                <span class="material-icons">search</span>
+                <input type="search" id="input-busqueda" placeholder="Buscar artista, canción, género..."/>
             </div>
+            
+            <hr class="divider"/>
+            
+            <form id="form-anadir-cancion" class="song-form">
+                <h3><span class="material-icons">add_circle_outline</span> Gestionar Canción</h3>
+                
+                <div class="form-grid">
+                    <!-- Campos Básicos -->
+                    <input type="text" id="titulo" placeholder="Título Canción" required/>
+                    <input type="text" id="artista_nombre" placeholder="Artista Principal" required/>
+                    <input type="text" id="album_titulo" placeholder="Álbum" required/>
+                    <input type="text" id="genero" placeholder="Género" required/>
+                    <input type="text" id="duracion" placeholder="Duración (seg)" required/>
+
+                    <!-- NUEVOS CAMPOS DE LA ONTOLOGÍA -->
+                    <input type="text" id="compositor" placeholder="Compositor"/>
+                    <input type="text" id="escritor" placeholder="Escritor"/>
+                    <input type="text" id="productor" placeholder="Productor"/>
+                    <input type="text" id="discografica" placeholder="Discográfica (Del Álbum)"/>
+                </div>
+                
+                <button type="submit" class="btn-primary">Guardar / Actualizar</button>
+            </form>
         </section>
 
-        <!-- 1. SECCIÓN TODAS LAS CANCIONES -->
+        <!-- LISTA DE CANCIONES -->
         <section class="section" id="seccion-canciones">
-            <h2>Todas las Canciones</h2>
-            <div id="songs-list-container" class="songs-list">
-                <div class="song-header">
-                    <span>TÍTULO</span>
-                    <span>ARTISTA / ÁLBUM</span>
-                    <span>GÉNERO</span>
-                    <span>DURACIÓN</span>
+            <h2><span class="material-icons">library_music</span> Biblioteca Musical</h2>
+            <div class="table-container glass-panel">
+                <div class="table-header extended-header">
+                    <span>TÍTULO / ARTISTA</span>
+                    <span>ÁLBUM / DISQUERA</span>
+                    <span>CRÉDITOS</span>
+                    <span>GÉNERO / DUR.</span>
                     <span>ACCIONES</span>
                 </div>
-                <!-- Las canciones se llenarán aquí con JavaScript -->
+                <div id="songs-list-container">
+                    <!-- JS llenará esto -->
+                </div>
             </div>
         </section>
 
-        <!-- 2. SECCIÓN ARTISTAS -->
+        <!-- TARJETAS -->
         <section class="section">
-            <h2>Artistas</h2>
-            <div class="artists-grid" id="artists-container">
-                <!-- Los artistas se llenarán aquí con JavaScript -->
-            </div>
+            <h2><span class="material-icons">mic</span> Artistas</h2>
+            <div class="grid-cards" id="artists-container"></div>
         </section>
 
-        <!-- 3. SECCIÓN ÁLBUMES -->
         <section class="section">
-            <h2>Álbumes</h2>
-            <div class="albums-grid" id="albums-container">
-                <!-- Los álbumes se llenarán aquí con JavaScript -->
-            </div>
+            <h2><span class="material-icons">album</span> Álbumes</h2>
+            <div class="grid-cards" id="albums-container"></div>
         </section>
     </div>
+
     <script src="/static/script.js"></script>
 </body>
 </html>

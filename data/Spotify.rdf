@@ -270,175 +270,134 @@
 </owl:ObjectProperty>
 
 <owl:DatatypeProperty rdf:about="#tieneBiografia">
-  <rdfs:domain rdf:resource="#Persona_Musical"/>
   <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
 </owl:DatatypeProperty>
 
 <owl:DatatypeProperty rdf:about="#tieneDescripcion">
-  <rdfs:domain rdf:resource="#Genero"/>
-  <rdfs:domain rdf:resource="#Playlist"/>
   <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
 </owl:DatatypeProperty>
 
 <owl:DatatypeProperty rdf:about="#tieneDuracion">
-  <rdfs:domain rdf:resource="#Cancion"/>
   <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#integer"/>
 </owl:DatatypeProperty>
 
 <owl:DatatypeProperty rdf:about="#tieneEmail">
-  <rdfs:domain rdf:resource="#Usuario"/>
   <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
 </owl:DatatypeProperty>
 
 <owl:DatatypeProperty rdf:about="#tieneEspecialidad">
-  <rdfs:domain rdf:resource="#Compositor"/>
   <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
 </owl:DatatypeProperty>
 
 <owl:DatatypeProperty rdf:about="#tieneEstiloProduccion">
-  <rdfs:domain rdf:resource="#productor"/>
   <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
 </owl:DatatypeProperty>
 
 <owl:DatatypeProperty rdf:about="#tieneEstudio">
-  <rdfs:domain rdf:resource="#productor"/>
   <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
 </owl:DatatypeProperty>
 
 <owl:DatatypeProperty rdf:about="#tieneFechaCreacion">
-  <rdfs:domain rdf:resource="#Playlist"/>
   <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#dateTime"/>
 </owl:DatatypeProperty>
 
 <owl:DatatypeProperty rdf:about="#tieneFechaGrabacion">
-  <rdfs:domain rdf:resource="#Cancion"/>
   <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#dateTime"/>
 </owl:DatatypeProperty>
 
 <owl:DatatypeProperty rdf:about="#tieneFechaLanzamiento">
-  <rdfs:domain rdf:resource="#Album"/>
-  <rdfs:domain rdf:resource="#Cancion"/>
   <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#dateTime"/>
 </owl:DatatypeProperty>
 
 <owl:DatatypeProperty rdf:about="#tieneFechaNacimiento">
-  <rdfs:domain rdf:resource="#Persona_Musical"/>
-  <rdfs:domain rdf:resource="#Usuario"/>
   <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#dateTime"/>
 </owl:DatatypeProperty>
 
 <owl:DatatypeProperty rdf:about="#tieneFechaRegistro">
-  <rdfs:domain rdf:resource="#Usuario"/>
   <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#dateTime"/>
 </owl:DatatypeProperty>
 
 <owl:DatatypeProperty rdf:about="#tieneIdiomas">
-  <rdfs:domain rdf:resource="#Escritor"/>
   <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
 </owl:DatatypeProperty>
 
 <owl:DatatypeProperty rdf:about="#tieneImagenPerfil">
-  <rdfs:domain rdf:resource="#Artista"/>
-  <rdfs:domain rdf:resource="#Usuario"/>
   <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
 </owl:DatatypeProperty>
 
 <owl:DatatypeProperty rdf:about="#tieneImagenPortada">
-  <rdfs:domain rdf:resource="#Playlist"/>
   <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
 </owl:DatatypeProperty>
 
 <owl:DatatypeProperty rdf:about="#tieneLetra">
-  <rdfs:domain rdf:resource="#Cancion"/>
   <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
 </owl:DatatypeProperty>
 
 <owl:DatatypeProperty rdf:about="#tieneNacionalidad">
-  <rdfs:domain rdf:resource="#Persona_Musical"/>
   <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
 </owl:DatatypeProperty>
 
 <owl:DatatypeProperty rdf:about="#tieneNombre">
-  <rdfs:domain rdf:resource="#Dsicografia"/>
-  <rdfs:domain rdf:resource="#Genero"/>
-  <rdfs:domain rdf:resource="#Persona_Musical"/>
-  <rdfs:domain rdf:resource="#Usuario"/>
   <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
 </owl:DatatypeProperty>
 
 <owl:DatatypeProperty rdf:about="#tieneNombreArtistico">
-  <rdfs:domain rdf:resource="#Artista"/>
   <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
 </owl:DatatypeProperty>
 
 <owl:DatatypeProperty rdf:about="#tieneNumeroPista">
-  <rdfs:domain rdf:resource="#Cancion"/>
   <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
 </owl:DatatypeProperty>
 
 <owl:DatatypeProperty rdf:about="#tienePaisOrigen">
-  <rdfs:domain rdf:resource="#Dsicografia"/>
   <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
 </owl:DatatypeProperty>
 
 <owl:DatatypeProperty rdf:about="#tienePlan">
-  <rdfs:domain rdf:resource="#Usuario"/>
   <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
 </owl:DatatypeProperty>
 
 <owl:DatatypeProperty rdf:about="#tienePortada">
-  <rdfs:domain rdf:resource="#Album"/>
   <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
 </owl:DatatypeProperty>
 
 <owl:DatatypeProperty rdf:about="#tieneRating">
-  <rdfs:domain rdf:resource="#Album"/>
-  <rdfs:domain rdf:resource="#Cancion"/>
   <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#double"/>
 </owl:DatatypeProperty>
 
 <owl:DatatypeProperty rdf:about="#tieneReproducciones">
-  <rdfs:domain rdf:resource="#Cancion"/>
   <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#integer"/>
 </owl:DatatypeProperty>
 
 <owl:DatatypeProperty rdf:about="#tieneSeguidores">
-  <rdfs:domain rdf:resource="#Artista"/>
   <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#integer"/>
 </owl:DatatypeProperty>
 
 <owl:DatatypeProperty rdf:about="#tieneSitioWeb">
-  <rdfs:domain rdf:resource="#Dsicografia"/>
   <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
 </owl:DatatypeProperty>
 
 <owl:DatatypeProperty rdf:about="#tieneTipoArtista">
-  <rdfs:domain rdf:resource="#Artista"/>
   <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
 </owl:DatatypeProperty>
 
 <owl:DatatypeProperty rdf:about="#tieneTituloAlbum">
-  <rdfs:domain rdf:resource="#Album"/>
   <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
 </owl:DatatypeProperty>
 
 <owl:DatatypeProperty rdf:about="#tieneTituloCancion">
-  <rdfs:domain rdf:resource="#Cancion"/>
   <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
 </owl:DatatypeProperty>
 
 <owl:DatatypeProperty rdf:about="#tieneTituloPlaylist">
-  <rdfs:domain rdf:resource="#Playlist"/>
   <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
 </owl:DatatypeProperty>
 
 <owl:DatatypeProperty rdf:about="#tieneTituloSingle">
-  <rdfs:domain rdf:resource="#Single"/>
   <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
 </owl:DatatypeProperty>
 
 <owl:DatatypeProperty rdf:about="#tieneVisibilidad">
-  <rdfs:domain rdf:resource="#Playlist"/>
   <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
 </owl:DatatypeProperty>
 
@@ -482,6 +441,14 @@
   <rdfs:subClassOf rdf:resource="#Persona_Musical"/>
 </owl:Class>
 
+<owl:Class rdf:about="#RecursoUsuario"/>
+
+<owl:Class rdf:about="#Persona"/>
+
+<owl:Class rdf:about="#Ent_Organizacion"/>
+
+<owl:Class rdf:about="#Contenido_Musical"/>
+
 <owl:Class rdf:about="#Persona_Musical">
   <rdfs:subClassOf rdf:resource="#Persona"/>
   <owl:disjointWith rdf:resource="#Usuario"/>
@@ -491,16 +458,10 @@
   <rdfs:subClassOf rdf:resource="#Album"/>
 </owl:Class>
 
-<owl:Class rdf:about="#RecursoUsuario"/>
-
-<owl:Class rdf:about="#Persona"/>
-
-<owl:Class rdf:about="#Ent_Organizacion"/>
-
-<owl:Class rdf:about="#Contenido_Musical"/>
-
 <owl:NamedIndividual rdf:about="#Bad_Bunny">
   <rdf:type rdf:resource="#Artista"/>
+  <rdf:type rdf:resource="#Compositor"/>
+  <rdf:type rdf:resource="#Escritor"/>
   <tieneGenero rdf:resource="#Reggaeton"/>
   <tieneNombre rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Benito Antonio Martínez Ocasio</tieneNombre>
   <tieneNombreArtistico rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Bad Bunny</tieneNombreArtistico>
@@ -511,70 +472,454 @@
   <tieneNombre rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Reggaeton</tieneNombre>
 </owl:NamedIndividual>
 
+<owl:NamedIndividual rdf:about="#Tainy">
+  <rdf:type rdf:resource="#productor"/>
+  <tieneNombre rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Tainy</tieneNombre>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#Rimas_Entertainment">
+  <rdf:type rdf:resource="#Dsicografia"/>
+  <tieneNombre rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Rimas Entertainment</tieneNombre>
+</owl:NamedIndividual>
+
 <owl:NamedIndividual rdf:about="#Un_Verano_Sin_Ti">
   <rdf:type rdf:resource="#Album"/>
   <tieneArtistaPrincipal rdf:resource="#Bad_Bunny"/>
+  <tieneGenero rdf:resource="#Reggaeton"/>
+  <perteneceADiscografica rdf:resource="#Rimas_Entertainment"/>
   <tieneTituloAlbum rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Un Verano Sin Ti</tieneTituloAlbum>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#Ojitos_Lindos">
+  <rdf:type rdf:resource="#Cancion"/>
+  <tieneArtistaPrincipal rdf:resource="#Bad_Bunny"/>
+  <perteneceAAlbum rdf:resource="#Un_Verano_Sin_Ti"/>
+  <tieneGenero rdf:resource="#Reggaeton"/>
+  <tieneCompositor rdf:resource="#Bad_Bunny"/>
+  <tieneEscritor rdf:resource="#Bad_Bunny"/>
+  <tieneProductor rdf:resource="#Tainy"/>
+  <tieneTituloCancion rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Ojitos Lindos</tieneTituloCancion>
+  <tieneDuracion rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">258</tieneDuracion>
 </owl:NamedIndividual>
 
 <owl:NamedIndividual rdf:about="#Grover_Washington_Jr">
   <rdf:type rdf:resource="#Artista"/>
+  <rdf:type rdf:resource="#productor"/>
   <tieneNombre rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Grover Washington Jr</tieneNombre>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#Bill_Withers">
+  <rdf:type rdf:resource="#Compositor"/>
+  <rdf:type rdf:resource="#Escritor"/>
+  <tieneNombre rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Bill Withers</tieneNombre>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#Elektra_Records">
+  <rdf:type rdf:resource="#Dsicografia"/>
+  <tieneNombre rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Elektra Records</tieneNombre>
 </owl:NamedIndividual>
 
 <owl:NamedIndividual rdf:about="#jazz">
   <rdf:type rdf:resource="#Genero"/>
-  <tieneNombre rdf:datatype="http://www.w3.org/2001/XMLSchema#string">jazz</tieneNombre>
+  <tieneNombre rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Jazz</tieneNombre>
 </owl:NamedIndividual>
 
 <owl:NamedIndividual rdf:about="#Winelight">
   <rdf:type rdf:resource="#Album"/>
   <tieneArtistaPrincipal rdf:resource="#Grover_Washington_Jr"/>
   <tieneGenero rdf:resource="#jazz"/>
+  <perteneceADiscografica rdf:resource="#Elektra_Records"/>
   <tieneTituloAlbum rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Winelight</tieneTituloAlbum>
 </owl:NamedIndividual>
 
-<owl:NamedIndividual rdf:about="#Grover_">
-  <rdf:type rdf:resource="#Artista"/>
-  <tieneNombre rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Grover </tieneNombre>
-</owl:NamedIndividual>
-
-<owl:NamedIndividual rdf:about="#Wine">
-  <rdf:type rdf:resource="#Album"/>
-  <tieneArtistaPrincipal rdf:resource="#Grover_"/>
+<owl:NamedIndividual rdf:about="#Just_the_two_of_us">
+  <rdf:type rdf:resource="#Cancion"/>
+  <tieneArtistaPrincipal rdf:resource="#Grover_Washington_Jr"/>
+  <perteneceAAlbum rdf:resource="#Winelight"/>
   <tieneGenero rdf:resource="#jazz"/>
-  <tieneTituloAlbum rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Wine</tieneTituloAlbum>
+  <tieneCompositor rdf:resource="#Bill_Withers"/>
+  <tieneEscritor rdf:resource="#Bill_Withers"/>
+  <tieneProductor rdf:resource="#Grover_Washington_Jr"/>
+  <tieneTituloCancion rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Just the Two of Us</tieneTituloCancion>
+  <tieneDuracion rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">237</tieneDuracion>
 </owl:NamedIndividual>
 
-<owl:NamedIndividual rdf:about="#jaz">
+<owl:NamedIndividual rdf:about="#rammstein">
+  <rdf:type rdf:resource="#Artista"/>
+  <rdf:type rdf:resource="#Compositor"/>
+  <tieneNombre rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Rammstein</tieneNombre>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#Jacob_Hellner">
+  <rdf:type rdf:resource="#productor"/>
+  <tieneNombre rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Jacob Hellner</tieneNombre>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#Universal_Music">
+  <rdf:type rdf:resource="#Dsicografia"/>
+  <tieneNombre rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Universal Music</tieneNombre>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#rock">
   <rdf:type rdf:resource="#Genero"/>
-  <tieneNombre rdf:datatype="http://www.w3.org/2001/XMLSchema#string">jaz</tieneNombre>
+  <tieneNombre rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Rock Industrial</tieneNombre>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#Rosenrot">
+  <rdf:type rdf:resource="#Album"/>
+  <tieneArtistaPrincipal rdf:resource="#rammstein"/>
+  <tieneGenero rdf:resource="#rock"/>
+  <perteneceADiscografica rdf:resource="#Universal_Music"/>
+  <tieneTituloAlbum rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Rosenrot</tieneTituloAlbum>
 </owl:NamedIndividual>
 
 <owl:NamedIndividual rdf:about="#Te_quiero_puta">
   <rdf:type rdf:resource="#Cancion"/>
-  <tieneArtistaPrincipal rdf:resource="#rammste"/>
-  <tieneGenero rdf:resource="#roc"/>
-  <perteneceAAlbum rdf:resource="#put"/>
-  <tieneTituloCancion rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Te quiero </tieneTituloCancion>
-  <tieneDuracion rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">40</tieneDuracion>
+  <tieneArtistaPrincipal rdf:resource="#rammstein"/>
+  <perteneceAAlbum rdf:resource="#Rosenrot"/>
+  <tieneGenero rdf:resource="#rock"/>
+  <tieneCompositor rdf:resource="#rammstein"/>
+  <tieneEscritor rdf:resource="#rammstein"/>
+  <tieneProductor rdf:resource="#Jacob_Hellner"/>
+  <tieneTituloCancion rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Te quiero puta</tieneTituloCancion>
+  <tieneDuracion rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">236</tieneDuracion>
 </owl:NamedIndividual>
 
-<owl:NamedIndividual rdf:about="#rammste">
+<owl:NamedIndividual rdf:about="#Michael_Jackson">
   <rdf:type rdf:resource="#Artista"/>
-  <tieneNombre rdf:datatype="http://www.w3.org/2001/XMLSchema#string">rammste</tieneNombre>
+  <rdf:type rdf:resource="#Compositor"/>
+  <rdf:type rdf:resource="#Escritor"/>
+  <tieneNombre rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Michael Jackson</tieneNombre>
 </owl:NamedIndividual>
 
-<owl:NamedIndividual rdf:about="#roc">
+<owl:NamedIndividual rdf:about="#Quincy_Jones">
+  <rdf:type rdf:resource="#productor"/>
+  <tieneNombre rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Quincy Jones</tieneNombre>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#Epic_Records">
+  <rdf:type rdf:resource="#Dsicografia"/>
+  <tieneNombre rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Epic Records</tieneNombre>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#Pop">
   <rdf:type rdf:resource="#Genero"/>
-  <tieneNombre rdf:datatype="http://www.w3.org/2001/XMLSchema#string">roc</tieneNombre>
+  <tieneNombre rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Pop</tieneNombre>
 </owl:NamedIndividual>
 
-<owl:NamedIndividual rdf:about="#put">
+<owl:NamedIndividual rdf:about="#Thriller">
   <rdf:type rdf:resource="#Album"/>
-  <tieneArtistaPrincipal rdf:resource="#rammste"/>
-  <tieneGenero rdf:resource="#roc"/>
-  <tieneTituloAlbum rdf:datatype="http://www.w3.org/2001/XMLSchema#string">put</tieneTituloAlbum>
+  <tieneArtistaPrincipal rdf:resource="#Michael_Jackson"/>
+  <perteneceADiscografica rdf:resource="#Epic_Records"/>
+  <tieneGenero rdf:resource="#Pop"/>
+  <tieneTituloAlbum rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Thriller</tieneTituloAlbum>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#Billie_Jean">
+  <rdf:type rdf:resource="#Cancion"/>
+  <tieneGenero rdf:resource="#Pop"/>
+  <tieneArtistaPrincipal rdf:resource="#Michael_Jackson"/>
+  <perteneceAAlbum rdf:resource="#Thriller"/>
+  <tieneCompositor rdf:resource="#Michael_Jackson"/>
+  <tieneEscritor rdf:resource="#Michael_Jackson"/>
+  <tieneProductor rdf:resource="#Quincy_Jones"/>
+  <tieneTituloCancion rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Billie Jean</tieneTituloCancion>
+  <tieneDuracion rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">294</tieneDuracion>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#Queen">
+  <rdf:type rdf:resource="#Artista"/>
+  <tieneNombre rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Queen</tieneNombre>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#Freddie_Mercury">
+  <rdf:type rdf:resource="#Compositor"/>
+  <rdf:type rdf:resource="#Escritor"/>
+  <tieneNombre rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Freddie Mercury</tieneNombre>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#Roy_Thomas_Baker">
+  <rdf:type rdf:resource="#productor"/>
+  <tieneNombre rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Roy Thomas Baker</tieneNombre>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#EMI_Records">
+  <rdf:type rdf:resource="#Dsicografia"/>
+  <tieneNombre rdf:datatype="http://www.w3.org/2001/XMLSchema#string">EMI Records</tieneNombre>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#Rock">
+  <rdf:type rdf:resource="#Genero"/>
+  <tieneNombre rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Rock</tieneNombre>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#A_Night_at_the_Opera">
+  <rdf:type rdf:resource="#Album"/>
+  <tieneArtistaPrincipal rdf:resource="#Queen"/>
+  <perteneceADiscografica rdf:resource="#EMI_Records"/>
+  <tieneGenero rdf:resource="#Rock"/>
+  <tieneTituloAlbum rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A Night at the Opera</tieneTituloAlbum>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#Bohemian_Rhapsody">
+  <rdf:type rdf:resource="#Cancion"/>
+  <tieneGenero rdf:resource="#Rock"/>
+  <tieneArtistaPrincipal rdf:resource="#Queen"/>
+  <perteneceAAlbum rdf:resource="#A_Night_at_the_Opera"/>
+  <tieneCompositor rdf:resource="#Freddie_Mercury"/>
+  <tieneEscritor rdf:resource="#Freddie_Mercury"/>
+  <tieneProductor rdf:resource="#Roy_Thomas_Baker"/>
+  <tieneTituloCancion rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Bohemian Rhapsody</tieneTituloCancion>
+  <tieneDuracion rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">355</tieneDuracion>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#The_Weeknd">
+  <rdf:type rdf:resource="#Artista"/>
+  <rdf:type rdf:resource="#Compositor"/>
+  <rdf:type rdf:resource="#Escritor"/>
+  <tieneNombre rdf:datatype="http://www.w3.org/2001/XMLSchema#string">The Weeknd</tieneNombre>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#Max_Martin">
+  <rdf:type rdf:resource="#productor"/>
+  <tieneNombre rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Max Martin</tieneNombre>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#XO_Republic">
+  <rdf:type rdf:resource="#Dsicografia"/>
+  <tieneNombre rdf:datatype="http://www.w3.org/2001/XMLSchema#string">XO Republic</tieneNombre>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#Synth_Pop">
+  <rdf:type rdf:resource="#Genero"/>
+  <tieneNombre rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Synth Pop</tieneNombre>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#After_Hours">
+  <rdf:type rdf:resource="#Album"/>
+  <tieneArtistaPrincipal rdf:resource="#The_Weeknd"/>
+  <perteneceADiscografica rdf:resource="#XO_Republic"/>
+  <tieneGenero rdf:resource="#Synth_Pop"/>
+  <tieneTituloAlbum rdf:datatype="http://www.w3.org/2001/XMLSchema#string">After Hours</tieneTituloAlbum>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#Blinding_Lights">
+  <rdf:type rdf:resource="#Cancion"/>
+  <tieneGenero rdf:resource="#Synth_Pop"/>
+  <tieneArtistaPrincipal rdf:resource="#The_Weeknd"/>
+  <perteneceAAlbum rdf:resource="#After_Hours"/>
+  <tieneCompositor rdf:resource="#The_Weeknd"/>
+  <tieneEscritor rdf:resource="#The_Weeknd"/>
+  <tieneProductor rdf:resource="#Max_Martin"/>
+  <tieneTituloCancion rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Blinding Lights</tieneTituloCancion>
+  <tieneDuracion rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">200</tieneDuracion>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#Ed_Sheeran">
+  <rdf:type rdf:resource="#Artista"/>
+  <rdf:type rdf:resource="#Compositor"/>
+  <rdf:type rdf:resource="#Escritor"/>
+  <tieneNombre rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Ed Sheeran</tieneNombre>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#Steve_Mac">
+  <rdf:type rdf:resource="#productor"/>
+  <tieneNombre rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Steve Mac</tieneNombre>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#Atlantic_Records">
+  <rdf:type rdf:resource="#Dsicografia"/>
+  <tieneNombre rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Atlantic Records</tieneNombre>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#Divide">
+  <rdf:type rdf:resource="#Album"/>
+  <tieneArtistaPrincipal rdf:resource="#Ed_Sheeran"/>
+  <perteneceADiscografica rdf:resource="#Atlantic_Records"/>
+  <tieneGenero rdf:resource="#Pop"/>
+  <tieneTituloAlbum rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Divide</tieneTituloAlbum>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#Shape_of_You">
+  <rdf:type rdf:resource="#Cancion"/>
+  <tieneGenero rdf:resource="#Pop"/>
+  <tieneArtistaPrincipal rdf:resource="#Ed_Sheeran"/>
+  <perteneceAAlbum rdf:resource="#Divide"/>
+  <tieneCompositor rdf:resource="#Ed_Sheeran"/>
+  <tieneEscritor rdf:resource="#Ed_Sheeran"/>
+  <tieneProductor rdf:resource="#Steve_Mac"/>
+  <tieneTituloCancion rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Shape of You</tieneTituloCancion>
+  <tieneDuracion rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">233</tieneDuracion>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#Adele">
+  <rdf:type rdf:resource="#Artista"/>
+  <rdf:type rdf:resource="#Compositor"/>
+  <rdf:type rdf:resource="#Escritor"/>
+  <tieneNombre rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Adele</tieneNombre>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#Paul_Epworth">
+  <rdf:type rdf:resource="#productor"/>
+  <tieneNombre rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Paul Epworth</tieneNombre>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#XL_Recordings">
+  <rdf:type rdf:resource="#Dsicografia"/>
+  <tieneNombre rdf:datatype="http://www.w3.org/2001/XMLSchema#string">XL Recordings</tieneNombre>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#Soul">
+  <rdf:type rdf:resource="#Genero"/>
+  <tieneNombre rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Soul</tieneNombre>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#Twenty_One">
+  <rdf:type rdf:resource="#Album"/>
+  <tieneArtistaPrincipal rdf:resource="#Adele"/>
+  <perteneceADiscografica rdf:resource="#XL_Recordings"/>
+  <tieneGenero rdf:resource="#Soul"/>
+  <tieneTituloAlbum rdf:datatype="http://www.w3.org/2001/XMLSchema#string">21</tieneTituloAlbum>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#Rolling_in_the_Deep">
+  <rdf:type rdf:resource="#Cancion"/>
+  <tieneGenero rdf:resource="#Soul"/>
+  <tieneArtistaPrincipal rdf:resource="#Adele"/>
+  <perteneceAAlbum rdf:resource="#Twenty_One"/>
+  <tieneCompositor rdf:resource="#Adele"/>
+  <tieneEscritor rdf:resource="#Adele"/>
+  <tieneProductor rdf:resource="#Paul_Epworth"/>
+  <tieneTituloCancion rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Rolling in the Deep</tieneTituloCancion>
+  <tieneDuracion rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">228</tieneDuracion>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#Nirvana">
+  <rdf:type rdf:resource="#Artista"/>
+  <tieneNombre rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Nirvana</tieneNombre>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#Kurt_Cobain">
+  <rdf:type rdf:resource="#Compositor"/>
+  <rdf:type rdf:resource="#Escritor"/>
+  <tieneNombre rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Kurt Cobain</tieneNombre>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#Butch_Vig">
+  <rdf:type rdf:resource="#productor"/>
+  <tieneNombre rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Butch Vig</tieneNombre>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#DGC_Records">
+  <rdf:type rdf:resource="#Dsicografia"/>
+  <tieneNombre rdf:datatype="http://www.w3.org/2001/XMLSchema#string">DGC Records</tieneNombre>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#Grunge">
+  <rdf:type rdf:resource="#Genero"/>
+  <tieneNombre rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Grunge</tieneNombre>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#Nevermind">
+  <rdf:type rdf:resource="#Album"/>
+  <tieneArtistaPrincipal rdf:resource="#Nirvana"/>
+  <perteneceADiscografica rdf:resource="#DGC_Records"/>
+  <tieneGenero rdf:resource="#Grunge"/>
+  <tieneTituloAlbum rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Nevermind</tieneTituloAlbum>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#Smells_Like_Teen_Spirit">
+  <rdf:type rdf:resource="#Cancion"/>
+  <tieneGenero rdf:resource="#Grunge"/>
+  <tieneArtistaPrincipal rdf:resource="#Nirvana"/>
+  <perteneceAAlbum rdf:resource="#Nevermind"/>
+  <tieneCompositor rdf:resource="#Kurt_Cobain"/>
+  <tieneEscritor rdf:resource="#Kurt_Cobain"/>
+  <tieneProductor rdf:resource="#Butch_Vig"/>
+  <tieneTituloCancion rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Smells Like Teen Spirit</tieneTituloCancion>
+  <tieneDuracion rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">301</tieneDuracion>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#Eagles">
+  <rdf:type rdf:resource="#Artista"/>
+  <tieneNombre rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Eagles</tieneNombre>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#Don_Felder">
+  <rdf:type rdf:resource="#Compositor"/>
+  <rdf:type rdf:resource="#Escritor"/>
+  <tieneNombre rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Don Felder</tieneNombre>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#Bill_Szymczyk">
+  <rdf:type rdf:resource="#productor"/>
+  <tieneNombre rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Bill Szymczyk</tieneNombre>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#Asylum_Records">
+  <rdf:type rdf:resource="#Dsicografia"/>
+  <tieneNombre rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Asylum Records</tieneNombre>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#Hotel_California_Album">
+  <rdf:type rdf:resource="#Album"/>
+  <tieneArtistaPrincipal rdf:resource="#Eagles"/>
+  <perteneceADiscografica rdf:resource="#Asylum_Records"/>
+  <tieneGenero rdf:resource="#Rock"/>
+  <tieneTituloAlbum rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Hotel California</tieneTituloAlbum>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#Hotel_California">
+  <rdf:type rdf:resource="#Cancion"/>
+  <tieneGenero rdf:resource="#Rock"/>
+  <tieneArtistaPrincipal rdf:resource="#Eagles"/>
+  <perteneceAAlbum rdf:resource="#Hotel_California_Album"/>
+  <tieneCompositor rdf:resource="#Don_Felder"/>
+  <tieneEscritor rdf:resource="#Don_Felder"/>
+  <tieneProductor rdf:resource="#Bill_Szymczyk"/>
+  <tieneTituloCancion rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Hotel California</tieneTituloCancion>
+  <tieneDuracion rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">390</tieneDuracion>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#Dua_Lipa">
+  <rdf:type rdf:resource="#Artista"/>
+  <tieneNombre rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Dua Lipa</tieneNombre>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#DIsco">
+  <rdf:type rdf:resource="#Genero"/>
+  <tieneNombre rdf:datatype="http://www.w3.org/2001/XMLSchema#string">DIsco</tieneNombre>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#Warner_Records">
+  <rdf:type rdf:resource="#Dsicografia"/>
+  <tieneNombre rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Warner Records</tieneNombre>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#FUture_Nostalgia">
+  <rdf:type rdf:resource="#Album"/>
+  <tieneArtistaPrincipal rdf:resource="#Dua_Lipa"/>
+  <tieneGenero rdf:resource="#DIsco"/>
+  <perteneceADiscografica rdf:resource="#Warner_Records"/>
+  <tieneNombre rdf:datatype="http://www.w3.org/2001/XMLSchema#string">FUture Nostalgia</tieneNombre>
+  <tieneTituloAlbum rdf:datatype="http://www.w3.org/2001/XMLSchema#string">FUture Nostalgia</tieneTituloAlbum>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#Stuart_Price">
+  <rdf:type rdf:resource="#productor"/>
+  <tieneNombre rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Stuart Price</tieneNombre>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#Levitating">
+  <rdf:type rdf:resource="#Cancion"/>
+  <tieneArtistaPrincipal rdf:resource="#Dua_Lipa"/>
+  <perteneceAAlbum rdf:resource="#FUture_Nostalgia"/>
+  <tieneGenero rdf:resource="#DIsco"/>
+  <tieneCompositor rdf:resource="#Dua_Lipa"/>
+  <tieneEscritor rdf:resource="#Dua_Lipa"/>
+  <tieneProductor rdf:resource="#Stuart_Price"/>
+  <tieneTituloCancion rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Levitating</tieneTituloCancion>
+  <tieneDuracion rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">204</tieneDuracion>
 </owl:NamedIndividual>
 
 

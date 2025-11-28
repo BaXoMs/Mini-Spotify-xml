@@ -12,7 +12,7 @@ function cargarDatos(query = '') {
         .then(response => response.json())
         .then(data => {
             renderizarCanciones(data);
-            if (!query) { // Solo regeneramos artistas/albumes si no estamos filtrando
+            if (!query) {
                 renderizarArtistas(data);
                 renderizarAlbumes(data);
             }
@@ -22,24 +22,33 @@ function cargarDatos(query = '') {
 
 function renderizarCanciones(data) {
     const container = document.getElementById('songs-list-container');
-    // Limpiamos filas viejas
-    const existingRows = container.querySelectorAll('.song-row');
-    existingRows.forEach(row => row.remove());
+    container.innerHTML = ''; 
 
     data.forEach(cancion => {
         const fila = document.createElement('div');
         fila.classList.add('song-row');
+        // Mostramos los nuevos datos en la tabla
         fila.innerHTML = `
-            <div class="title">${cancion.titulo}</div>
-            <div>
-                <span class="song-artist">${cancion.artista}</span><br/>
-                <span class="song-album">${cancion.album}</span>
+            <div class="col-basic">
+                <span class="song-title">${cancion.titulo}</span>
+                <span class="song-artist">${cancion.artista}</span>
             </div>
-            <div><span class="genre-tag">${cancion.genero}</span></div>
-            <div class="song-duration">${cancion.duracion}</div>
-            <div>
-                <button class="btn-editar" data-id="${cancion.id}">Editar</button>
-                <button class="btn-eliminar" data-id="${cancion.id}">Eliminar</button>
+            <div class="col-album">
+                <span class="song-album">${cancion.album}</span>
+                <span class="song-label"><small>${cancion.discografica || 'Sin disquera'}</small></span>
+            </div>
+            <div class="col-credits">
+                <small>✍️ Comp: ${cancion.compositor || '-'}</small><br>
+                <small>📝 Escr: ${cancion.escritor || '-'}</small><br>
+                <small>🎚️ Prod: ${cancion.productor || '-'}</small>
+            </div>
+            <div class="col-meta">
+                <span class="badge">${cancion.genero}</span>
+                <span class="duration">${cancion.duracion}s</span>
+            </div>
+            <div class="col-actions">
+                <button class="btn-icon edit" data-id="${cancion.id}"><span class="material-icons">edit</span></button>
+                <button class="btn-icon delete" data-id="${cancion.id}"><span class="material-icons">delete</span></button>
             </div>
         `;
         container.appendChild(fila);
@@ -49,17 +58,15 @@ function renderizarCanciones(data) {
 function renderizarArtistas(data) {
     const container = document.getElementById('artists-container');
     container.innerHTML = '';
-    
-    // Extraemos artistas únicos
     const artistasUnicos = [...new Set(data.map(item => item.artista))];
 
     artistasUnicos.forEach(artista => {
         const card = document.createElement('div');
-        card.classList.add('artist-card');
+        card.classList.add('card');
         card.innerHTML = `
-            <div class="artist-avatar">${artista.charAt(0)}</div>
-            <h3>${artista}</h3>
-            <p class="country">Artista</p>
+            <div class="card-icon"><span class="material-icons">person</span></div>
+            <h4>${artista}</h4>
+            <p>Artista</p>
         `;
         container.appendChild(card);
     });
@@ -68,70 +75,56 @@ function renderizarArtistas(data) {
 function renderizarAlbumes(data) {
     const container = document.getElementById('albums-container');
     container.innerHTML = '';
-
-    // Extraemos álbumes únicos (usamos un mapa para evitar duplicados por nombre)
     const albumesMap = new Map();
     data.forEach(item => {
-        if (!albumesMap.has(item.album)) {
-            albumesMap.set(item.album, item.artista);
-        }
+        if (!albumesMap.has(item.album)) albumesMap.set(item.album, item.artista);
     });
 
     albumesMap.forEach((artista, album) => {
         const card = document.createElement('div');
-        card.classList.add('album-card');
+        card.classList.add('card');
         card.innerHTML = `
-            <div class="album-cover">${album.charAt(0)}</div>
-            <div class="album-info">
-                <h3>${album}</h3>
-                <div class="album-id">${artista}</div>
-            </div>
+            <div class="card-icon"><span class="material-icons">album</span></div>
+            <h4>${album}</h4>
+            <p>${artista}</p>
         `;
         container.appendChild(card);
     });
 }
 
-// --- CONFIGURACIONES DE EVENTOS (Igual que antes) ---
-
 function configurarBusqueda() {
     const input = document.getElementById('input-busqueda');
-    const form = document.getElementById('form-busqueda');
-
     input.addEventListener('input', () => cargarDatos(input.value));
-    
-    input.addEventListener('keydown', (e) => {
-        if (e.key === 'Enter') {
-            e.preventDefault();
-            document.getElementById('seccion-canciones')?.scrollIntoView({ behavior: 'smooth' });
-        }
-    });
-
-    form?.addEventListener('submit', e => e.preventDefault());
 }
 
 function configurarListaCanciones() {
     const container = document.getElementById('songs-list-container');
-    if (!container) return;
-
     container.addEventListener('click', (e) => {
-        const target = e.target;
-        const id = target.dataset.id;
-
-        if (target.classList.contains('btn-eliminar')) {
-            if (confirm('¿Eliminar canción?')) {
+        const btn = e.target.closest('button');
+        if (!btn) return;
+        
+        const id = btn.dataset.id;
+        if (btn.classList.contains('delete')) {
+            if (confirm('¿Eliminar canción y limpiar referencias?')) {
                 fetch(`/api/canciones/${id}`, { method: 'DELETE' })
                     .then(res => res.json())
                     .then(() => cargarDatos(document.getElementById('input-busqueda').value));
             }
-        } else if (target.classList.contains('btn-editar')) {
+        } else if (btn.classList.contains('edit')) {
             fetch(`/api/canciones/${id}`)
                 .then(res => res.json())
                 .then(cancion => {
+                    // Llenar TODOS los campos, incluyendo los nuevos
                     document.getElementById('titulo').value = cancion.titulo;
                     document.getElementById('artista_nombre').value = cancion.artista;
                     document.getElementById('album_titulo').value = cancion.album;
                     document.getElementById('genero').value = cancion.genero;
                     document.getElementById('duracion').value = cancion.duracion;
+                    
+                    document.getElementById('compositor').value = cancion.compositor || '';
+                    document.getElementById('escritor').value = cancion.escritor || '';
+                    document.getElementById('productor').value = cancion.productor || '';
+                    document.getElementById('discografica').value = cancion.discografica || '';
 
                     const form = document.getElementById('form-anadir-cancion');
                     form.dataset.editingId = cancion.id;
@@ -152,7 +145,12 @@ function configurarFormulario() {
             artista: document.getElementById('artista_nombre').value,
             album: document.getElementById('album_titulo').value,
             genero: document.getElementById('genero').value,
-            duracion: document.getElementById('duracion').value
+            duracion: document.getElementById('duracion').value,
+            // Nuevos campos
+            compositor: document.getElementById('compositor').value,
+            escritor: document.getElementById('escritor').value,
+            productor: document.getElementById('productor').value,
+            discografica: document.getElementById('discografica').value
         };
 
         const method = id ? 'PUT' : 'POST';
