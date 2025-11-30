@@ -129,6 +129,55 @@ def get_canciones():
         titulo = get_safe_property(cancion, "tieneTituloCancion")
         artista = get_related_name(cancion, "tieneArtistaPrincipal", "tieneNombre")
         
+        album_obj = cancion.perteneceAAlbum[0] if cancion.perteneceAAlbum else None
+        album_nombre = album_obj.tieneTituloAlbum[0] if album_obj and album_obj.tieneTituloAlbum else "Desconocido"
+        
+        discografica = ""
+        if album_obj and hasattr(album_obj, 'perteneceADiscografica') and album_obj.perteneceADiscografica:
+            disc_obj = album_obj.perteneceADiscografica[0]
+            discografica = disc_obj.tieneNombre[0] if disc_obj.tieneNombre else disc_obj.name
+
+        compositor = get_related_name(cancion, "tieneCompositor", "tieneNombre")
+        escritor = get_related_name(cancion, "tieneEscritor", "tieneNombre")
+        productor = get_related_name(cancion, "tieneProductor", "tieneNombre")
+        
+        genero = get_related_name(cancion, "tieneGenero", "tieneNombre")
+        duracion = get_safe_property(cancion, "tieneDuracion")
+
+        # ============================
+        # 🔍 FILTRO MEJORADO (solo esto cambiamos)
+        # ============================
+        if query:
+            coincide = (
+                query in titulo.lower() or
+                query in artista.lower() or
+                query in album_nombre.lower() or
+                query in genero.lower()
+            )
+            if not coincide:
+                continue
+
+        canciones_list.append({
+            "id": cancion.name,
+            "titulo": titulo,
+            "artista": artista,
+            "album": album_nombre,
+            "discografica": discografica,
+            "genero": genero,
+            "duracion": str(duracion),
+            "compositor": compositor,
+            "escritor": escritor,
+            "productor": productor
+        })
+    return jsonify(canciones_list)
+
+    query = request.args.get('q', '').lower()
+    canciones_list = []
+    
+    for cancion in onto.Cancion.instances():
+        titulo = get_safe_property(cancion, "tieneTituloCancion")
+        artista = get_related_name(cancion, "tieneArtistaPrincipal", "tieneNombre")
+        
         # Recuperamos la información extendida
         # Para Discografica, navegamos: Cancion -> Album -> Discografica
         album_obj = cancion.perteneceAAlbum[0] if cancion.perteneceAAlbum else None

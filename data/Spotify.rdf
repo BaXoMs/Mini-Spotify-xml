@@ -484,9 +484,9 @@
 
 <owl:NamedIndividual rdf:about="#Un_Verano_Sin_Ti">
   <rdf:type rdf:resource="#Album"/>
-  <tieneArtistaPrincipal rdf:resource="#Bad_Bunny"/>
   <tieneGenero rdf:resource="#Reggaeton"/>
-  <perteneceADiscografica rdf:resource="#Rimas_Entertainment"/>
+  <tieneArtistaPrincipal rdf:resource="#Benito_Antonio_Martínez_Ocasio"/>
+  <perteneceADiscografica rdf:resource="#Rimmas_Entertainment"/>
   <tieneTituloAlbum rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Un Verano Sin Ti</tieneTituloAlbum>
 </owl:NamedIndividual>
 
@@ -542,47 +542,6 @@
   <tieneProductor rdf:resource="#Grover_Washington_Jr"/>
   <tieneTituloCancion rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Just the Two of Us</tieneTituloCancion>
   <tieneDuracion rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">237</tieneDuracion>
-</owl:NamedIndividual>
-
-<owl:NamedIndividual rdf:about="#rammstein">
-  <rdf:type rdf:resource="#Artista"/>
-  <rdf:type rdf:resource="#Compositor"/>
-  <tieneNombre rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Rammstein</tieneNombre>
-</owl:NamedIndividual>
-
-<owl:NamedIndividual rdf:about="#Jacob_Hellner">
-  <rdf:type rdf:resource="#productor"/>
-  <tieneNombre rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Jacob Hellner</tieneNombre>
-</owl:NamedIndividual>
-
-<owl:NamedIndividual rdf:about="#Universal_Music">
-  <rdf:type rdf:resource="#Dsicografia"/>
-  <tieneNombre rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Universal Music</tieneNombre>
-</owl:NamedIndividual>
-
-<owl:NamedIndividual rdf:about="#rock">
-  <rdf:type rdf:resource="#Genero"/>
-  <tieneNombre rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Rock Industrial</tieneNombre>
-</owl:NamedIndividual>
-
-<owl:NamedIndividual rdf:about="#Rosenrot">
-  <rdf:type rdf:resource="#Album"/>
-  <tieneArtistaPrincipal rdf:resource="#rammstein"/>
-  <tieneGenero rdf:resource="#rock"/>
-  <perteneceADiscografica rdf:resource="#Universal_Music"/>
-  <tieneTituloAlbum rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Rosenrot</tieneTituloAlbum>
-</owl:NamedIndividual>
-
-<owl:NamedIndividual rdf:about="#Te_quiero_puta">
-  <rdf:type rdf:resource="#Cancion"/>
-  <tieneArtistaPrincipal rdf:resource="#rammstein"/>
-  <perteneceAAlbum rdf:resource="#Rosenrot"/>
-  <tieneGenero rdf:resource="#rock"/>
-  <tieneCompositor rdf:resource="#rammstein"/>
-  <tieneEscritor rdf:resource="#rammstein"/>
-  <tieneProductor rdf:resource="#Jacob_Hellner"/>
-  <tieneTituloCancion rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Te quiero puta</tieneTituloCancion>
-  <tieneDuracion rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">236</tieneDuracion>
 </owl:NamedIndividual>
 
 <owl:NamedIndividual rdf:about="#Michael_Jackson">
@@ -920,6 +879,33 @@
   <tieneProductor rdf:resource="#Stuart_Price"/>
   <tieneTituloCancion rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Levitating</tieneTituloCancion>
   <tieneDuracion rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">204</tieneDuracion>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#Benito_Antonio_Martínez_Ocasio">
+  <rdf:type rdf:resource="#Artista"/>
+  <tieneNombre rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Benito Antonio Martínez Ocasio</tieneNombre>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#Rimmas_Entertainment">
+  <rdf:type rdf:resource="#Dsicografia"/>
+  <tieneNombre rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Rimmas Entertainment</tieneNombre>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#Marco_Daniel_Borrero">
+  <rdf:type rdf:resource="#Escritor"/>
+  <tieneNombre rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Marco Daniel Borrero</tieneNombre>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#Moscow_Mule">
+  <rdf:type rdf:resource="#Cancion"/>
+  <tieneArtistaPrincipal rdf:resource="#Benito_Antonio_Martínez_Ocasio"/>
+  <perteneceAAlbum rdf:resource="#Un_Verano_Sin_Ti"/>
+  <tieneGenero rdf:resource="#Reggaeton"/>
+  <tieneCompositor rdf:resource="#Benito_Antonio_Martínez_Ocasio"/>
+  <tieneEscritor rdf:resource="#Marco_Daniel_Borrero"/>
+  <tieneProductor rdf:resource="#Marco_Daniel_Borrero"/>
+  <tieneTituloCancion rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Moscow Mule</tieneTituloCancion>
+  <tieneDuracion rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">300</tieneDuracion>
 </owl:NamedIndividual>
 
 
